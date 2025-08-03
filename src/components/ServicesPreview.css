@@ -1,0 +1,45 @@
+/* src/components/ServicesPreview.css */
+
+.services-preview {
+  padding: 4rem 2rem;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.services-preview h2 {
+  font-size: 2rem;
+  color: #00325e;
+  margin-bottom: 2.5rem;
+}
+
+.service-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+}
+
+.card {
+  background: white;
+  border: 1px solid #ddd;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 280px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+}
+
+.card h3 {
+  color: #205f8d;
+  margin: 1rem 0 0.5rem;
+  font-size: 1.2rem;
+}
+
+.card p {
+  color: #444;
+  font-size: 0.95rem;
+}

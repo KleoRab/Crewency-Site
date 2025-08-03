@@ -36,3 +36,16 @@
     transform: rotate(360deg);
   }
 }
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #001e36;
+  color: #ffffff;
+}
+a {
+  color: #4fa2d4;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}

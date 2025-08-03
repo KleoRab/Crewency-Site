@@ -1,0 +1,57 @@
+.careers-preview {
+  padding: 4rem 2rem;
+  background-color: #0a2a4a;
+  color: white;
+}
+
+.careers-content {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  max-width: 1200px;
+  margin: auto;
+  gap: 2rem;
+}
+
+.careers-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+.careers-text h2 {
+  font-size: 2rem;
+  color: #4fa2d4;
+}
+
+.careers-text p {
+  margin-top: 1rem;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.careers-image {
+  flex: 1;
+  min-width: 300px;
+}
+
+.careers-image img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.explore-button {
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: #00325e;
+  color: white;
+  padding: 0.7rem 1.4rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.explore-button:hover {
+  background-color: #205f8d;
+}
