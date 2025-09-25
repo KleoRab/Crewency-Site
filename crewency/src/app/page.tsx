@@ -6,7 +6,6 @@ import Link from 'next/link';
 import {
   ArrowRightIcon,
   CheckIcon,
-  StarIcon,
   UserGroupIcon,
   ChartBarIcon,
   CalendarIcon,

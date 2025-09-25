@@ -66,67 +66,187 @@ export class SocialMediaServiceFactory {
 
 // Placeholder services for platforms not yet implemented
 class TikTokService implements SocialMediaService {
-  async authenticate() { throw new Error('TikTok service not implemented'); }
-  async refreshToken() { throw new Error('TikTok service not implemented'); }
-  async getUserProfile() { throw new Error('TikTok service not implemented'); }
-  async schedulePost() { throw new Error('TikTok service not implemented'); }
-  async publishPost() { throw new Error('TikTok service not implemented'); }
-  async getPostAnalytics() { throw new Error('TikTok service not implemented'); }
-  validatePostContent() { return { isValid: false, errors: ['TikTok service not implemented'] }; }
-  getPostingRequirements() { return {}; }
+  constructor(accessToken?: string) {
+    // Constructor for consistency
+  }
+  
+  async authenticate(): Promise<{ accessToken: string; refreshToken?: string }> { 
+    throw new Error('TikTok service not implemented'); 
+  }
+  async refreshToken(): Promise<{ accessToken: string }> { 
+    throw new Error('TikTok service not implemented'); 
+  }
+  async getUserProfile(): Promise<any> { 
+    throw new Error('TikTok service not implemented'); 
+  }
+  async schedulePost(): Promise<{ success: boolean; postId?: string; error?: string }> { 
+    throw new Error('TikTok service not implemented'); 
+  }
+  async publishPost(): Promise<{ success: boolean; postId?: string; error?: string }> { 
+    throw new Error('TikTok service not implemented'); 
+  }
+  async getPostAnalytics(): Promise<any> { 
+    throw new Error('TikTok service not implemented'); 
+  }
+  validatePostContent(): { isValid: boolean; errors: string[] } { 
+    return { isValid: false, errors: ['TikTok service not implemented'] }; 
+  }
+  getPostingRequirements(): any { 
+    return {}; 
+  }
 }
 
 class YouTubeService implements SocialMediaService {
-  async authenticate() { throw new Error('YouTube service not implemented'); }
-  async refreshToken() { throw new Error('YouTube service not implemented'); }
-  async getUserProfile() { throw new Error('YouTube service not implemented'); }
-  async schedulePost() { throw new Error('YouTube service not implemented'); }
-  async publishPost() { throw new Error('YouTube service not implemented'); }
-  async getPostAnalytics() { throw new Error('YouTube service not implemented'); }
-  validatePostContent() { return { isValid: false, errors: ['YouTube service not implemented'] }; }
-  getPostingRequirements() { return {}; }
+  constructor(accessToken?: string) {
+    // Constructor for consistency
+  }
+  
+  async authenticate(): Promise<{ accessToken: string; refreshToken?: string }> { 
+    throw new Error('YouTube service not implemented'); 
+  }
+  async refreshToken(): Promise<{ accessToken: string }> { 
+    throw new Error('YouTube service not implemented'); 
+  }
+  async getUserProfile(): Promise<any> { 
+    throw new Error('YouTube service not implemented'); 
+  }
+  async schedulePost(): Promise<{ success: boolean; postId?: string; error?: string }> { 
+    throw new Error('YouTube service not implemented'); 
+  }
+  async publishPost(): Promise<{ success: boolean; postId?: string; error?: string }> { 
+    throw new Error('YouTube service not implemented'); 
+  }
+  async getPostAnalytics(): Promise<any> { 
+    throw new Error('YouTube service not implemented'); 
+  }
+  validatePostContent(): { isValid: boolean; errors: string[] } { 
+    return { isValid: false, errors: ['YouTube service not implemented'] }; 
+  }
+  getPostingRequirements(): any { 
+    return {}; 
+  }
 }
 
 class ThreadsService implements SocialMediaService {
-  async authenticate() { throw new Error('Threads service not implemented'); }
-  async refreshToken() { throw new Error('Threads service not implemented'); }
-  async getUserProfile() { throw new Error('Threads service not implemented'); }
-  async schedulePost() { throw new Error('Threads service not implemented'); }
-  async publishPost() { throw new Error('Threads service not implemented'); }
-  async getPostAnalytics() { throw new Error('Threads service not implemented'); }
-  validatePostContent() { return { isValid: false, errors: ['Threads service not implemented'] }; }
-  getPostingRequirements() { return {}; }
+  constructor(accessToken?: string) {
+    // Constructor for consistency
+  }
+  
+  async authenticate(): Promise<{ accessToken: string; refreshToken?: string }> { 
+    throw new Error('Threads service not implemented'); 
+  }
+  async refreshToken(): Promise<{ accessToken: string }> { 
+    throw new Error('Threads service not implemented'); 
+  }
+  async getUserProfile(): Promise<any> { 
+    throw new Error('Threads service not implemented'); 
+  }
+  async schedulePost(): Promise<{ success: boolean; postId?: string; error?: string }> { 
+    throw new Error('Threads service not implemented'); 
+  }
+  async publishPost(): Promise<{ success: boolean; postId?: string; error?: string }> { 
+    throw new Error('Threads service not implemented'); 
+  }
+  async getPostAnalytics(): Promise<any> { 
+    throw new Error('Threads service not implemented'); 
+  }
+  validatePostContent(): { isValid: boolean; errors: string[] } { 
+    return { isValid: false, errors: ['Threads service not implemented'] }; 
+  }
+  getPostingRequirements(): any { 
+    return {}; 
+  }
 }
 
 class RedditService implements SocialMediaService {
-  async authenticate() { throw new Error('Reddit service not implemented'); }
-  async refreshToken() { throw new Error('Reddit service not implemented'); }
-  async getUserProfile() { throw new Error('Reddit service not implemented'); }
-  async schedulePost() { throw new Error('Reddit service not implemented'); }
-  async publishPost() { throw new Error('Reddit service not implemented'); }
-  async getPostAnalytics() { throw new Error('Reddit service not implemented'); }
-  validatePostContent() { return { isValid: false, errors: ['Reddit service not implemented'] }; }
-  getPostingRequirements() { return {}; }
+  constructor(accessToken?: string) {
+    // Constructor for consistency
+  }
+  
+  async authenticate(): Promise<{ accessToken: string; refreshToken?: string }> { 
+    throw new Error('Reddit service not implemented'); 
+  }
+  async refreshToken(): Promise<{ accessToken: string }> { 
+    throw new Error('Reddit service not implemented'); 
+  }
+  async getUserProfile(): Promise<any> { 
+    throw new Error('Reddit service not implemented'); 
+  }
+  async schedulePost(): Promise<{ success: boolean; postId?: string; error?: string }> { 
+    throw new Error('Reddit service not implemented'); 
+  }
+  async publishPost(): Promise<{ success: boolean; postId?: string; error?: string }> { 
+    throw new Error('Reddit service not implemented'); 
+  }
+  async getPostAnalytics(): Promise<any> { 
+    throw new Error('Reddit service not implemented'); 
+  }
+  validatePostContent(): { isValid: boolean; errors: string[] } { 
+    return { isValid: false, errors: ['Reddit service not implemented'] }; 
+  }
+  getPostingRequirements(): any { 
+    return {}; 
+  }
 }
 
 class PinterestService implements SocialMediaService {
-  async authenticate() { throw new Error('Pinterest service not implemented'); }
-  async refreshToken() { throw new Error('Pinterest service not implemented'); }
-  async getUserProfile() { throw new Error('Pinterest service not implemented'); }
-  async schedulePost() { throw new Error('Pinterest service not implemented'); }
-  async publishPost() { throw new Error('Pinterest service not implemented'); }
-  async getPostAnalytics() { throw new Error('Pinterest service not implemented'); }
-  validatePostContent() { return { isValid: false, errors: ['Pinterest service not implemented'] }; }
-  getPostingRequirements() { return {}; }
+  constructor(accessToken?: string) {
+    // Constructor for consistency
+  }
+  
+  async authenticate(): Promise<{ accessToken: string; refreshToken?: string }> { 
+    throw new Error('Pinterest service not implemented'); 
+  }
+  async refreshToken(): Promise<{ accessToken: string }> { 
+    throw new Error('Pinterest service not implemented'); 
+  }
+  async getUserProfile(): Promise<any> { 
+    throw new Error('Pinterest service not implemented'); 
+  }
+  async schedulePost(): Promise<{ success: boolean; postId?: string; error?: string }> { 
+    throw new Error('Pinterest service not implemented'); 
+  }
+  async publishPost(): Promise<{ success: boolean; postId?: string; error?: string }> { 
+    throw new Error('Pinterest service not implemented'); 
+  }
+  async getPostAnalytics(): Promise<any> { 
+    throw new Error('Pinterest service not implemented'); 
+  }
+  validatePostContent(): { isValid: boolean; errors: string[] } { 
+    return { isValid: false, errors: ['Pinterest service not implemented'] }; 
+  }
+  getPostingRequirements(): any { 
+    return {}; 
+  }
 }
 
 class TumblrService implements SocialMediaService {
-  async authenticate() { throw new Error('Tumblr service not implemented'); }
-  async refreshToken() { throw new Error('Tumblr service not implemented'); }
-  async getUserProfile() { throw new Error('Tumblr service not implemented'); }
-  async schedulePost() { throw new Error('Tumblr service not implemented'); }
-  async publishPost() { throw new Error('Tumblr service not implemented'); }
-  async getPostAnalytics() { throw new Error('Tumblr service not implemented'); }
-  validatePostContent() { return { isValid: false, errors: ['Tumblr service not implemented'] }; }
-  getPostingRequirements() { return {}; }
+  constructor(accessToken?: string) {
+    // Constructor for consistency
+  }
+  
+  async authenticate(): Promise<{ accessToken: string; refreshToken?: string }> { 
+    throw new Error('Tumblr service not implemented'); 
+  }
+  async refreshToken(): Promise<{ accessToken: string }> { 
+    throw new Error('Tumblr service not implemented'); 
+  }
+  async getUserProfile(): Promise<any> { 
+    throw new Error('Tumblr service not implemented'); 
+  }
+  async schedulePost(): Promise<{ success: boolean; postId?: string; error?: string }> { 
+    throw new Error('Tumblr service not implemented'); 
+  }
+  async publishPost(): Promise<{ success: boolean; postId?: string; error?: string }> { 
+    throw new Error('Tumblr service not implemented'); 
+  }
+  async getPostAnalytics(): Promise<any> { 
+    throw new Error('Tumblr service not implemented'); 
+  }
+  validatePostContent(): { isValid: boolean; errors: string[] } { 
+    return { isValid: false, errors: ['Tumblr service not implemented'] }; 
+  }
+  getPostingRequirements(): any { 
+    return {}; 
+  }
 }

@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
       }, { status: 400 });
     }
 
-    const supabase = createServerSupabase();
+    const supabase = await createServerSupabase();
 
     // Create user in Supabase Auth
     const { data: authData, error: authError } = await supabase.auth.signUp({
@@ -86,7 +86,7 @@ export async function POST(request: NextRequest) {
       action: 'register',
       resource_type: 'user',
       resource_id: authData.user.id,
-      ip_address: request.ip || request.headers.get('x-forwarded-for'),
+      ip_address: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip'),
       user_agent: request.headers.get('user-agent'),
     });
 

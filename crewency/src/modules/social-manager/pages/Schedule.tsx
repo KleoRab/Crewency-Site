@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import {
   CalendarIcon,
@@ -236,7 +236,7 @@ const CalendarView = () => {
 export default function Schedule() {
   const [socialAccounts] = useState<SocialAccount[]>(mockSocialAccounts);
   const [scheduledPosts] = useState<ScheduledPost[]>(mockScheduledPosts);
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedDate] = useState(new Date());
 
   const getPostsForSelectedDate = () => {
     return scheduledPosts.filter(post => {

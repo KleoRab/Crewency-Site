@@ -1,5 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
-import { createClientComponentClient, createServerComponentClient } from '@supabase/ssr';
+import { createBrowserClient, createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
 // Environment variables
@@ -16,13 +16,19 @@ export const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
 // Client component client (for use in client components)
 export const createClientSupabase = () => {
-  return createClientComponentClient();
+  return createBrowserClient(supabaseUrl, supabaseAnonKey);
 };
 
 // Server component client (for use in server components)
-export const createServerSupabase = () => {
-  const cookieStore = cookies();
-  return createServerComponentClient({ cookies: () => cookieStore });
+export const createServerSupabase = async () => {
+  const cookieStore = await cookies();
+  return createServerClient(supabaseUrl, supabaseAnonKey, {
+    cookies: {
+      get(name: string) {
+        return cookieStore.get(name)?.value;
+      },
+    },
+  });
 };
 
 // Admin client (for server-side operations with service role)

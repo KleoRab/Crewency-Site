@@ -129,7 +129,7 @@ const ActivityItem = ({ activity }: { activity: AdminStats['recentActivity'][0] 
 };
 
 export default function AdminDashboard() {
-  const [stats, setStats] = useState<AdminStats>(mockStats);
+  const [stats] = useState<AdminStats>(mockStats);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

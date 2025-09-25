@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
       }, { status: 400 });
     }
 
-    const supabase = createServerSupabase();
+    const supabase = await createServerSupabase();
 
     // Authenticate with Supabase
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -68,7 +68,7 @@ export async function POST(request: NextRequest) {
       action: 'login',
       resource_type: 'user',
       resource_id: data.user.id,
-      ip_address: request.ip || request.headers.get('x-forwarded-for'),
+      ip_address: request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip'),
       user_agent: request.headers.get('user-agent'),
     });
 

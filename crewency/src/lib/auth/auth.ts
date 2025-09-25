@@ -6,7 +6,7 @@ import { cookies } from 'next/headers';
 // Get current user from server-side
 export async function getCurrentUser(): Promise<User | null> {
   try {
-    const supabase = createServerSupabase();
+    const supabase = await createServerSupabase();
     const { data: { user }, error } = await supabase.auth.getUser();
 
     if (error || !user) {
@@ -99,7 +99,7 @@ export async function canAccessOrganization(
   organizationId: string
 ): Promise<boolean> {
   try {
-    const supabase = createServerSupabase();
+    const supabase = await createServerSupabase();
     const { data, error } = await supabase
       .from('users')
       .select('organization_id')
@@ -117,7 +117,7 @@ export async function canAccessOrganization(
 // Get user's organization
 export async function getUserOrganization(userId: string) {
   try {
-    const supabase = createServerSupabase();
+    const supabase = await createServerSupabase();
     const { data, error } = await supabase
       .from('users')
       .select(`
@@ -179,7 +179,7 @@ export async function requireOrganizationAccess(
 // Update user's last login
 export async function updateLastLogin(userId: string): Promise<void> {
   try {
-    const supabase = createServerSupabase();
+    const supabase = await createServerSupabase();
     await supabase
       .from('users')
       .update({ last_login: new Date().toISOString() })
@@ -200,7 +200,7 @@ export async function createAuditLog(
   request?: NextRequest
 ): Promise<void> {
   try {
-    const supabase = createServerSupabase();
+    const supabase = await createServerSupabase();
     await supabase.from('audit_logs').insert({
       user_id: userId,
       organization_id: organizationId,
@@ -208,7 +208,7 @@ export async function createAuditLog(
       resource_type: resourceType,
       resource_id: resourceId,
       details,
-      ip_address: request?.ip || request?.headers.get('x-forwarded-for'),
+      ip_address: request?.headers.get('x-forwarded-for') || request?.headers.get('x-real-ip'),
       user_agent: request?.headers.get('user-agent'),
     });
   } catch (error) {
@@ -219,7 +219,7 @@ export async function createAuditLog(
 // Validate JWT token
 export async function validateToken(token: string): Promise<boolean> {
   try {
-    const supabase = createServerSupabase();
+    const supabase = await createServerSupabase();
     const { data, error } = await supabase.auth.getUser(token);
     return !error && !!data.user;
   } catch (error) {

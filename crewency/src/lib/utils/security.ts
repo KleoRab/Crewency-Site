@@ -273,7 +273,7 @@ export class AuditUtils {
       {
         ...details,
         timestamp: new Date().toISOString(),
-        ipAddress: request?.ip || request?.headers.get('x-forwarded-for'),
+        ipAddress: request?.headers.get('x-forwarded-for') || request?.headers.get('x-real-ip'),
         userAgent: request?.headers.get('user-agent'),
       }
     );
@@ -296,7 +296,7 @@ export class AuditUtils {
       resourceId,
       {
         timestamp: new Date().toISOString(),
-        ipAddress: request?.ip || request?.headers.get('x-forwarded-for'),
+        ipAddress: request?.headers.get('x-forwarded-for') || request?.headers.get('x-real-ip'),
         userAgent: request?.headers.get('user-agent'),
       }
     );

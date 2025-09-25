@@ -13,7 +13,7 @@ import {
   ArrowUpIcon,
   ArrowDownIcon,
 } from '@heroicons/react/24/outline';
-import { DashboardStats, ActivityItem } from '@/types';
+import { DashboardStats, ActivityItem as ActivityItemType } from '@/types';
 
 // Mock data for demonstration
 const mockStats: DashboardStats = {
@@ -91,7 +91,7 @@ const StatCard = ({ title, value, change, icon: Icon, color = 'blue' }: {
   </motion.div>
 );
 
-const ActivityItem = ({ activity }: { activity: ActivityItem }) => (
+const ActivityItem = ({ activity }: { activity: ActivityItemType }) => (
   <motion.div
     initial={{ opacity: 0, x: -20 }}
     animate={{ opacity: 1, x: 0 }}
@@ -108,7 +108,7 @@ const ActivityItem = ({ activity }: { activity: ActivityItem }) => (
 );
 
 export default function Dashboard() {
-  const [stats, setStats] = useState<DashboardStats>(mockStats);
+  const [stats] = useState<DashboardStats>(mockStats);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -133,7 +133,7 @@ export default function Dashboard() {
       {/* Header */}
       <div>
         <h1 className="text-2xl font-bold text-gray-900">Dashboard</h1>
-        <p className="text-gray-600">Welcome back! Here's what's happening with your social media.</p>
+            <p className="text-gray-600">Welcome back! Here&apos;s what&apos;s happening with your social media.</p>
       </div>
 
       {/* Stats Grid */}
