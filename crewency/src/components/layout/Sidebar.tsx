@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { usePathname } from 'next/navigation';
 import { motion } from 'framer-motion';
 import {
@@ -43,13 +44,26 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
           <motion.div
             initial={false}
             animate={{ opacity: isCollapsed ? 0 : 1 }}
-            className="flex items-center space-x-2"
+            className="flex items-center"
           >
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/crewency-logo.svg"
+                alt="Crewency"
+                width={120}
+                height={36}
+                className="h-8 w-auto"
+              />
+            </Link>
+          </motion.div>
+        )}
+        
+        {isCollapsed && (
+          <Link href="/" className="flex items-center justify-center">
             <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">C</span>
             </div>
-            <span className="text-xl font-bold text-gray-900">Crewency</span>
-          </motion.div>
+          </Link>
         )}
         
         <button
