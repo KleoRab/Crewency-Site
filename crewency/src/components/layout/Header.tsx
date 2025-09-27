@@ -2,6 +2,8 @@
 
 import { useState } from 'react';
 import { motion } from 'framer-motion';
+import Image from 'next/image';
+import Link from 'next/link';
 import {
   BellIcon,
   MagnifyingGlassIcon,
@@ -22,8 +24,21 @@ export default function Header({ user, onLogout }: HeaderProps) {
   return (
     <header className="bg-white border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between">
+        {/* Logo */}
+        <div className="flex items-center">
+          <Link href="/" className="flex items-center space-x-3">
+            <Image
+              src="/crewency-logo.svg"
+              alt="Crewency"
+              width={120}
+              height={36}
+              className="h-9 w-auto"
+            />
+          </Link>
+        </div>
+
         {/* Search */}
-        <div className="flex-1 max-w-lg">
+        <div className="flex-1 max-w-lg mx-8">
           <div className="relative">
             <MagnifyingGlassIcon className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-400" />
             <input

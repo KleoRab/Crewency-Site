@@ -6,6 +6,7 @@ const nextConfig: NextConfig = {
   },
   images: {
     domains: ['localhost', 'crewency-site.vercel.app'],
+    formats: ['image/webp', 'image/avif'],
   },
   // Fix lockfile detection issue
   outputFileTracingRoot: process.cwd(),

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   ArrowRightIcon,
   CheckIcon,
@@ -84,10 +85,15 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
-              <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">C</span>
-              </div>
-              <span className="ml-2 text-xl font-bold text-gray-900">Crewency</span>
+              <Link href="/" className="flex items-center">
+                <Image
+                  src="/crewency-logo.svg"
+                  alt="Crewency"
+                  width={120}
+                  height={36}
+                  className="h-9 w-auto"
+                />
+              </Link>
             </div>
             
             {/* Desktop Navigation */}
@@ -285,10 +291,13 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center mb-4">
-                <div className="w-8 h-8 bg-gradient-to-br from-blue-600 to-blue-800 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-sm">C</span>
-                </div>
-                <span className="ml-2 text-xl font-bold">Crewency</span>
+                <Image
+                  src="/crewency-logo.svg"
+                  alt="Crewency"
+                  width={120}
+                  height={36}
+                  className="h-9 w-auto"
+                />
               </div>
               <p className="text-gray-400">
                 AI-powered social media management for modern businesses.
