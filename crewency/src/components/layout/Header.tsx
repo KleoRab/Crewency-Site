@@ -12,6 +12,7 @@ import {
   ArrowRightOnRectangleIcon,
 } from '@heroicons/react/24/outline';
 import { User } from '@/types';
+import NotificationCenter from '@/components/notifications/NotificationCenter';
 
 interface HeaderProps {
   user: User;
@@ -52,13 +53,10 @@ export default function Header({ user, onLogout, showLogo = true }: HeaderProps)
           </div>
         </div>
 
-        {/* Right side */}
-        <div className="flex items-center space-x-4">
-          {/* Notifications */}
-          <button className="relative p-2 text-gray-400 hover:text-gray-600 transition-colors">
-            <BellIcon className="h-6 w-6" />
-            <span className="absolute top-1 right-1 h-2 w-2 bg-red-500 rounded-full"></span>
-          </button>
+            {/* Right side */}
+            <div className="flex items-center space-x-4">
+              {/* Notifications */}
+              <NotificationCenter />
 
           {/* User menu */}
           <div className="relative">

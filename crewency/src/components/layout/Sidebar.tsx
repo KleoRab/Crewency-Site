@@ -13,6 +13,7 @@ import {
   PlusIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
+  LinkIcon,
 } from '@heroicons/react/24/outline';
 
 interface SidebarProps {
@@ -25,6 +26,7 @@ const navigation = [
   { name: 'Content', href: '/content', icon: PlusIcon },
   { name: 'Schedule', href: '/schedule', icon: CalendarIcon },
   { name: 'Analytics', href: '/analytics', icon: ChartBarIcon },
+  { name: 'Accounts', href: '/accounts', icon: LinkIcon },
   { name: 'Team', href: '/team', icon: UserGroupIcon },
   { name: 'Settings', href: '/settings', icon: CogIcon },
 ];

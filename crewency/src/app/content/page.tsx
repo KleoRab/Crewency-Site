@@ -109,16 +109,53 @@ export default function ContentPage() {
 
   const handleAIGenerate = async () => {
     setIsGenerating(true);
-    // Simulate AI generation
+    // Simulate AI generation with different templates
+    const aiTemplates = [
+      '🚀 Excited to share our latest breakthrough in AI-powered social media management! Our new features will revolutionize how you engage with your audience. #innovation #AI #socialmedia #tech',
+      '💡 Pro tip: The best time to post on LinkedIn is Tuesday-Thursday between 8-10 AM. What's your go-to posting strategy? #socialmediamarketing #tips #engagement',
+      '🎯 Behind the scenes: Our team is working on something amazing! Can't wait to show you what we've been building. #teamwork #innovation #comingsoon',
+      '📊 Did you know? Posts with images get 2.3x more engagement than text-only posts. Visual content is key! #contentmarketing #socialmedia #stats',
+      '🔥 Customer spotlight: "Crewency helped us increase our social media engagement by 300%!" - Sarah from TechCorp. #customersuccess #testimonial #results'
+    ];
+    
     setTimeout(() => {
-      setContent('🚀 Excited to share our latest breakthrough in AI-powered social media management! Our new features will revolutionize how you engage with your audience. #innovation #AI #socialmedia #tech');
+      const randomTemplate = aiTemplates[Math.floor(Math.random() * aiTemplates.length)];
+      setContent(randomTemplate);
       setIsGenerating(false);
     }, 2000);
   };
 
   const handleSchedule = () => {
-    // Handle scheduling logic
-    console.log('Scheduling content:', { content, platforms: selectedPlatforms });
+    if (!content.trim()) {
+      alert('Please enter some content before scheduling.');
+      return;
+    }
+    if (selectedPlatforms.length === 0) {
+      alert('Please select at least one platform.');
+      return;
+    }
+    
+    // Simulate scheduling
+    const scheduledTime = new Date();
+    scheduledTime.setHours(scheduledTime.getHours() + 1);
+    
+    alert(`Post scheduled for ${scheduledTime.toLocaleString()} on ${selectedPlatforms.join(', ')}`);
+    console.log('Scheduling content:', { content, platforms: selectedPlatforms, scheduledTime });
+  };
+
+  const handlePublishNow = () => {
+    if (!content.trim()) {
+      alert('Please enter some content before publishing.');
+      return;
+    }
+    if (selectedPlatforms.length === 0) {
+      alert('Please select at least one platform.');
+      return;
+    }
+    
+    // Simulate publishing
+    alert(`Post published now on ${selectedPlatforms.join(', ')}`);
+    console.log('Publishing content:', { content, platforms: selectedPlatforms });
   };
 
   if (isLoading) {
@@ -139,7 +176,7 @@ export default function ContentPage() {
 
   return (
     <Layout user={user} onLogout={handleLogout}>
-      <div className="p-6 bg-gray-50 min-h-screen">
+      <div className="p-6 bg-gray-50 min-h-screen max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Content Creator</h1>
@@ -283,7 +320,10 @@ export default function ContentPage() {
                   <CalendarIcon className="h-5 w-5 mr-2" />
                   Schedule Post
                 </button>
-                <button className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors">
+                <button 
+                  onClick={handlePublishNow}
+                  className="w-full flex items-center justify-center px-4 py-2 border border-gray-300 text-gray-700 rounded-lg hover:bg-gray-50 transition-colors"
+                >
                   <GlobeAltIcon className="h-5 w-5 mr-2" />
                   Publish Now
                 </button>
