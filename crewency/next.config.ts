@@ -7,6 +7,7 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['localhost', 'crewency-site.vercel.app'],
     formats: ['image/webp', 'image/avif'],
+    minimumCacheTTL: 0, // Disable caching for development
   },
   // Fix lockfile detection issue
   outputFileTracingRoot: process.cwd(),

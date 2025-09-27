@@ -50,8 +50,8 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
                   <Image
                     src="/crewency-logo.svg"
                     alt="Crewency - Social Media Management"
-                    width={180}
-                    height={45}
+                    width={240}
+                    height={60}
                     className="h-8 w-auto"
                   />
             </Link>
