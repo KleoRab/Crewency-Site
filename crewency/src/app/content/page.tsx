@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Layout from '@/components/layout/Layout';
-import AIAgent from '@/components/ai/AIAgent';
+import EnhancedAIAgent from '@/components/ai/EnhancedAIAgent';
 import { User } from '@/types';
 import { motion } from 'framer-motion';
 import {
@@ -379,9 +379,9 @@ export default function ContentPage() {
         </div>
       </div>
 
-      {/* AI Agent Modal */}
+      {/* Enhanced AI Agent Modal */}
       {showAIAgent && (
-        <AIAgent
+        <EnhancedAIAgent
           onContentGenerated={handleAIContentGenerated}
           onClose={() => setShowAIAgent(false)}
         />

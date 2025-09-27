@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Layout from '@/components/layout/Layout';
 import Dashboard from '@/modules/social-manager/pages/Dashboard';
+import EnhancedAIAgent from '@/components/ai/EnhancedAIAgent';
 import { User } from '@/types';
 
 // Mock user data for demonstration
@@ -23,6 +24,7 @@ const mockUser: User = {
 export default function DashboardPage() {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+  const [showAIAgent, setShowAIAgent] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -42,6 +44,11 @@ export default function DashboardPage() {
     router.push('/auth/login');
   };
 
+  const handleAIContentGenerated = (content: string, type: string) => {
+    console.log('AI generated content:', { content, type });
+    setShowAIAgent(false);
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -58,9 +65,17 @@ export default function DashboardPage() {
     return null;
   }
 
-  return (
-    <Layout user={user} onLogout={handleLogout}>
-      <Dashboard />
-    </Layout>
-  );
+      return (
+        <Layout user={user} onLogout={handleLogout} onOpenAIAgent={() => setShowAIAgent(true)}>
+          <Dashboard />
+          
+          {/* Enhanced AI Agent Modal */}
+          {showAIAgent && (
+            <EnhancedAIAgent
+              onContentGenerated={handleAIContentGenerated}
+              onClose={() => setShowAIAgent(false)}
+            />
+          )}
+        </Layout>
+      );
 }

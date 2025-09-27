@@ -4,14 +4,16 @@ import { useState } from 'react';
 import { User } from '@/types';
 import Sidebar from './Sidebar';
 import Header from './Header';
+import FloatingAIAssistant from '@/components/ai/FloatingAIAssistant';
 
 interface LayoutProps {
   children: React.ReactNode;
   user: User;
   onLogout: () => void;
+  onOpenAIAgent?: () => void;
 }
 
-export default function Layout({ children, user, onLogout }: LayoutProps) {
+export default function Layout({ children, user, onLogout, onOpenAIAgent }: LayoutProps) {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
@@ -32,6 +34,11 @@ export default function Layout({ children, user, onLogout }: LayoutProps) {
           {children}
         </main>
       </div>
+
+      {/* Floating AI Assistant */}
+      {onOpenAIAgent && (
+        <FloatingAIAssistant onOpenFullAgent={onOpenAIAgent} />
+      )}
     </div>
   );
 }
