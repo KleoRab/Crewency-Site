@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Layout from '@/components/layout/Layout';
+import AIAgent from '@/components/ai/AIAgent';
 import { User } from '@/types';
 import { motion } from 'framer-motion';
 import {
@@ -18,6 +19,7 @@ import {
   PencilIcon,
   TrashIcon,
   CheckIcon,
+  CpuChipIcon,
 } from '@heroicons/react/24/outline';
 
 // Mock user data
@@ -80,6 +82,7 @@ export default function ContentPage() {
   const [selectedTemplate, setSelectedTemplate] = useState<number | null>(null);
   const [isGenerating, setIsGenerating] = useState(false);
   const [showPreview, setShowPreview] = useState(false);
+  const [showAIAgent, setShowAIAgent] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -158,6 +161,19 @@ export default function ContentPage() {
     console.log('Publishing content:', { content, platforms: selectedPlatforms });
   };
 
+  const handleAIContentGenerated = (generatedContent: string, contentType: string) => {
+    setContent(generatedContent);
+    setShowAIAgent(false);
+    // Auto-select appropriate platforms based on content type
+    if (contentType === 'story') {
+      setSelectedPlatforms(['instagram', 'tiktok']);
+    } else if (contentType === 'video') {
+      setSelectedPlatforms(['youtube', 'tiktok', 'instagram']);
+    } else {
+      setSelectedPlatforms(['linkedin', 'twitter', 'facebook']);
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -217,14 +233,23 @@ export default function ContentPage() {
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
               <div className="flex items-center justify-between mb-4">
                 <h3 className="text-lg font-semibold text-gray-900">Create Content</h3>
-                <button
-                  onClick={handleAIGenerate}
-                  disabled={isGenerating}
-                  className="flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50"
-                >
-                  <SparklesIcon className="h-5 w-5 mr-2" />
-                  {isGenerating ? 'Generating...' : 'AI Generate'}
-                </button>
+                <div className="flex space-x-3">
+                  <button
+                    onClick={() => setShowAIAgent(true)}
+                    className="flex items-center px-4 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg hover:from-purple-700 hover:to-blue-700 transition-colors"
+                  >
+                    <CpuChipIcon className="h-5 w-5 mr-2" />
+                    AI Agent
+                  </button>
+                  <button
+                    onClick={handleAIGenerate}
+                    disabled={isGenerating}
+                    className="flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors disabled:opacity-50"
+                  >
+                    <SparklesIcon className="h-5 w-5 mr-2" />
+                    {isGenerating ? 'Generating...' : 'Quick AI'}
+                  </button>
+                </div>
               </div>
               
               <textarea
@@ -353,6 +378,14 @@ export default function ContentPage() {
         </div>
         </div>
       </div>
+
+      {/* AI Agent Modal */}
+      {showAIAgent && (
+        <AIAgent
+          onContentGenerated={handleAIContentGenerated}
+          onClose={() => setShowAIAgent(false)}
+        />
+      )}
     </Layout>
   );
 }
