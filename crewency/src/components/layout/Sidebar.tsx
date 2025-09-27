@@ -47,13 +47,13 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
             className="flex items-center"
           >
             <Link href="/" className="flex items-center">
-              <Image
-                src="/crewency-logo.svg"
-                alt="Crewency - Social Media Management"
-                width={160}
-                height={40}
-                className="h-8 w-auto"
-              />
+                  <Image
+                    src="/crewency-logo.svg"
+                    alt="Crewency - Social Media Management"
+                    width={180}
+                    height={45}
+                    className="h-8 w-auto"
+                  />
             </Link>
           </motion.div>
         )}

@@ -86,13 +86,13 @@ export default function HomePage() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center">
               <Link href="/" className="flex items-center">
-                <Image
-                  src="/crewency-logo.svg"
-                  alt="Crewency - Social Media Management"
-                  width={160}
-                  height={40}
-                  className="h-10 w-auto"
-                />
+                    <Image
+                      src="/crewency-logo.svg"
+                      alt="Crewency - Social Media Management"
+                      width={180}
+                      height={45}
+                      className="h-10 w-auto"
+                    />
               </Link>
             </div>
             
@@ -291,13 +291,13 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <div className="flex items-center mb-4">
-                <Image
-                  src="/crewency-logo.svg"
-                  alt="Crewency - Social Media Management"
-                  width={160}
-                  height={40}
-                  className="h-10 w-auto"
-                />
+                    <Image
+                      src="/crewency-logo.svg"
+                      alt="Crewency - Social Media Management"
+                      width={180}
+                      height={45}
+                      className="h-10 w-auto"
+                    />
               </div>
               <p className="text-gray-400">
                 AI-powered social media management for modern businesses.
