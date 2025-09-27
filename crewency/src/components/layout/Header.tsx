@@ -32,8 +32,8 @@ export default function Header({ user, onLogout, showLogo = true }: HeaderProps)
                   <Image
                     src="/crewency-logo.svg"
                     alt="Crewency - Social Media Management"
-                    width={220}
-                    height={50}
+                    width={200}
+                    height={45}
                     className="h-10 w-auto"
                   />
             </Link>
