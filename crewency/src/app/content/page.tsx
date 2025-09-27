@@ -112,8 +112,8 @@ export default function ContentPage() {
     // Simulate AI generation with different templates
     const aiTemplates = [
       '🚀 Excited to share our latest breakthrough in AI-powered social media management! Our new features will revolutionize how you engage with your audience. #innovation #AI #socialmedia #tech',
-      '💡 Pro tip: The best time to post on LinkedIn is Tuesday-Thursday between 8-10 AM. What's your go-to posting strategy? #socialmediamarketing #tips #engagement',
-      '🎯 Behind the scenes: Our team is working on something amazing! Can't wait to show you what we've been building. #teamwork #innovation #comingsoon',
+      '💡 Pro tip: The best time to post on LinkedIn is Tuesday-Thursday between 8-10 AM. What is your go-to posting strategy? #socialmediamarketing #tips #engagement',
+      '🎯 Behind the scenes: Our team is working on something amazing! Can not wait to show you what we have been building. #teamwork #innovation #comingsoon',
       '📊 Did you know? Posts with images get 2.3x more engagement than text-only posts. Visual content is key! #contentmarketing #socialmedia #stats',
       '🔥 Customer spotlight: "Crewency helped us increase our social media engagement by 300%!" - Sarah from TechCorp. #customersuccess #testimonial #results'
     ];
@@ -176,7 +176,8 @@ export default function ContentPage() {
 
   return (
     <Layout user={user} onLogout={handleLogout}>
-      <div className="p-6 bg-gray-50 min-h-screen max-w-7xl mx-auto">
+      <div className="p-6 bg-gray-50 min-h-screen">
+        <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900">Content Creator</h1>
@@ -349,6 +350,7 @@ export default function ContentPage() {
               </div>
             </div>
           </div>
+        </div>
         </div>
       </div>
     </Layout>

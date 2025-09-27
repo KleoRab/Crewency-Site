@@ -181,7 +181,8 @@ export default function SchedulePage() {
 
   return (
     <Layout user={user} onLogout={handleLogout}>
-      <div className="p-6 bg-gray-50 min-h-screen max-w-7xl mx-auto">
+      <div className="p-6 bg-gray-50 min-h-screen">
+        <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between">
@@ -436,6 +437,7 @@ export default function SchedulePage() {
             )}
           </motion.div>
         )}
+        </div>
       </div>
     </Layout>
   );
