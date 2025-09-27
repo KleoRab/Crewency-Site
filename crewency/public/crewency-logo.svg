@@ -1,25 +1,49 @@
 <svg width="200" height="60" viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
-  <!-- Background -->
-  <rect width="200" height="60" fill="#000000"/>
-  
-  <!-- Stylized C with gradient -->
   <defs>
+    <!-- Main C gradient -->
     <linearGradient id="cGradient" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+      <stop offset="25%" style="stop-color:#2563eb;stop-opacity:1" />
       <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#60a5fa;stop-opacity:1" />
+      <stop offset="75%" style="stop-color:#60a5fa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#93c5fd;stop-opacity:1" />
     </linearGradient>
+    
+    <!-- Highlight gradient -->
+    <linearGradient id="highlight" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.4" />
+      <stop offset="50%" style="stop-color:#ffffff;stop-opacity:0.1" />
+      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
+    </linearGradient>
+    
+    <!-- Shadow filter -->
+    <filter id="dropshadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="1" dy="2" stdDeviation="1.5" flood-color="#000000" flood-opacity="0.2"/>
+    </filter>
   </defs>
   
-  <!-- C shape -->
-  <path d="M15 15 Q15 5 25 5 L35 5 Q45 5 45 15 L45 25 Q45 35 35 35 L25 35 Q15 35 15 25 Z" fill="url(#cGradient)"/>
+  <!-- Main C shape with ribbon effect -->
+  <path d="M10 10 Q10 6 16 6 L26 6 Q32 6 32 10 L32 16 Q32 20 26 20 L16 20 Q10 20 10 16 Z" 
+        fill="url(#cGradient)" 
+        filter="url(#dropshadow)"/>
+  
+  <!-- C inner shadow for depth -->
+  <path d="M12 12 Q12 8 16 8 L26 8 Q30 8 30 12 L30 16 Q30 20 26 20 L16 20 Q12 20 12 16 Z" 
+        fill="#1e40af" 
+        opacity="0.2"/>
+  
+  <!-- Highlight on C -->
+  <path d="M10 10 Q10 6 16 6 L26 6 Q32 6 32 10 L32 12 Q32 8 26 8 L16 8 Q10 8 10 12 Z" 
+        fill="url(#highlight)"/>
   
   <!-- Connecting bar -->
-  <rect x="45" y="18" width="8" height="4" rx="2" fill="#60a5fa"/>
+  <rect x="32" y="12" width="5" height="4" rx="2" fill="#3b82f6"/>
   
-  <!-- REWENCY text -->
-  <text x="58" y="25" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="white">REWENCY</text>
+  <!-- REW text in blue -->
+  <text x="43" y="20" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+        font-size="22" font-weight="800" fill="#2563eb" letter-spacing="-0.5px">REW</text>
   
-  <!-- Special W in blue -->
-  <text x="70" y="25" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#60a5fa">W</text>
+  <!-- ENCY text in black -->
+  <text x="82" y="20" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif" 
+        font-size="22" font-weight="800" fill="#1f2937" letter-spacing="-0.5px">ENCY</text>
 </svg>
