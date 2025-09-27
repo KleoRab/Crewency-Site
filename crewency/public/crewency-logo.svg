@@ -1,51 +1,25 @@
-<svg width="240" height="80" viewBox="0 0 240 80" xmlns="http://www.w3.org/2000/svg">
+<svg width="180" height="40" viewBox="0 0 180 40" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <!-- Main C gradient - more sophisticated -->
+    <!-- Simple blue gradient for C -->
     <linearGradient id="cGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" style="stop-color:#1e3a8a;stop-opacity:1" />
-      <stop offset="20%" style="stop-color:#1e40af;stop-opacity:1" />
-      <stop offset="40%" style="stop-color:#2563eb;stop-opacity:1" />
-      <stop offset="60%" style="stop-color:#3b82f6;stop-opacity:1" />
-      <stop offset="80%" style="stop-color:#60a5fa;stop-opacity:1" />
-      <stop offset="100%" style="stop-color:#93c5fd;stop-opacity:1" />
+      <stop offset="0%" style="stop-color:#1e40af;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#3b82f6;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#60a5fa;stop-opacity:1" />
     </linearGradient>
-    
-    <!-- Highlight for 3D effect -->
-    <linearGradient id="highlight" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" style="stop-color:#ffffff;stop-opacity:0.6" />
-      <stop offset="30%" style="stop-color:#ffffff;stop-opacity:0.3" />
-      <stop offset="70%" style="stop-color:#ffffff;stop-opacity:0.1" />
-      <stop offset="100%" style="stop-color:#ffffff;stop-opacity:0" />
-    </linearGradient>
-    
-    <!-- Shadow for depth -->
-    <filter id="shadow" x="-50%" y="-50%" width="200%" height="200%">
-      <feDropShadow dx="2" dy="3" stdDeviation="2" flood-color="#000000" flood-opacity="0.15"/>
-    </filter>
   </defs>
   
-  <!-- Main C shape with sophisticated 3D ribbon effect -->
-  <path d="M15 15 Q15 8 22 8 L32 8 Q39 8 39 15 L39 25 Q39 32 32 32 L22 32 Q15 32 15 25 Z" 
-        fill="url(#cGradient)" 
-        filter="url(#shadow)"/>
-  
-  <!-- C inner curve for depth -->
-  <path d="M17 17 Q17 10 22 10 L32 10 Q37 10 37 17 L37 25 Q37 32 32 32 L22 32 Q17 32 17 25 Z" 
-        fill="#1e40af" 
-        opacity="0.15"/>
-  
-  <!-- C highlight for 3D effect -->
-  <path d="M15 15 Q15 8 22 8 L32 8 Q39 8 39 15 L39 20 Q39 13 32 13 L22 13 Q15 13 15 20 Z" 
-        fill="url(#highlight)"/>
+  <!-- Simple C shape -->
+  <path d="M8 8 Q8 4 12 4 L20 4 Q24 4 24 8 L24 16 Q24 20 20 20 L12 20 Q8 20 8 16 Z" 
+        fill="url(#cGradient)"/>
   
   <!-- Connecting bar -->
-  <rect x="39" y="18" width="6" height="6" rx="3" fill="#3b82f6"/>
+  <rect x="24" y="10" width="4" height="4" rx="2" fill="#3b82f6"/>
   
   <!-- REW text in blue -->
-  <text x="52" y="28" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
-        font-size="24" font-weight="700" fill="#2563eb" letter-spacing="-0.3px">REW</text>
+  <text x="34" y="18" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" 
+        font-size="18" font-weight="600" fill="#2563eb">REW</text>
   
   <!-- ENCY text in black -->
-  <text x="100" y="28" font-family="Inter, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" 
-        font-size="24" font-weight="700" fill="#000000" letter-spacing="-0.3px">ENCY</text>
+  <text x="70" y="18" font-family="Inter, -apple-system, BlinkMacSystemFont, sans-serif" 
+        font-size="18" font-weight="600" fill="#000000">ENCY</text>
 </svg>
