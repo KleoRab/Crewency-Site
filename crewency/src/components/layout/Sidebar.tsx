@@ -22,9 +22,9 @@ interface SidebarProps {
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
+  { name: 'Content', href: '/content', icon: PlusIcon },
   { name: 'Schedule', href: '/schedule', icon: CalendarIcon },
   { name: 'Analytics', href: '/analytics', icon: ChartBarIcon },
-  { name: 'Content', href: '/content', icon: PlusIcon },
   { name: 'Team', href: '/team', icon: UserGroupIcon },
   { name: 'Settings', href: '/settings', icon: CogIcon },
 ];
