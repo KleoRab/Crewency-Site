@@ -16,26 +16,29 @@ import { User } from '@/types';
 interface HeaderProps {
   user: User;
   onLogout: () => void;
+  showLogo?: boolean;
 }
 
-export default function Header({ user, onLogout }: HeaderProps) {
+export default function Header({ user, onLogout, showLogo = true }: HeaderProps) {
   const [showUserMenu, setShowUserMenu] = useState(false);
 
   return (
     <header className="bg-white border-b border-gray-200 px-6 py-4">
       <div className="flex items-center justify-between">
         {/* Logo */}
-        <div className="flex items-center">
-          <Link href="/" className="flex items-center">
-            <Image
-              src="/crewency-logo.svg"
-              alt="Crewency - Social Media Management"
-              width={160}
-              height={40}
-              className="h-10 w-auto"
-            />
-          </Link>
-        </div>
+        {showLogo && (
+          <div className="flex items-center">
+            <Link href="/" className="flex items-center">
+              <Image
+                src="/crewency-logo.svg"
+                alt="Crewency - Social Media Management"
+                width={160}
+                height={40}
+                className="h-10 w-auto"
+              />
+            </Link>
+          </div>
+        )}
 
         {/* Search */}
         <div className="flex-1 max-w-lg mx-8">

@@ -25,7 +25,7 @@ export default function Layout({ children, user, onLogout }: LayoutProps) {
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <Header user={user} onLogout={onLogout} />
+        <Header user={user} onLogout={onLogout} showLogo={false} />
 
         {/* Page content */}
         <main className="flex-1 overflow-y-auto">
