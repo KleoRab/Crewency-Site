@@ -13,6 +13,6 @@
         font-size="30" font-weight="700" fill="url(#crewGradient)" letter-spacing="-0.3px">CREW</text>
   
   <!-- ENCY text in solid black -->
-  <text x="82" y="34" font-family="Poppins, Inter, -apple-system, BlinkMacSystemFont, sans-serif" 
+  <text x="90" y="34" font-family="Poppins, Inter, -apple-system, BlinkMacSystemFont, sans-serif" 
         font-size="30" font-weight="700" fill="#111111" letter-spacing="-0.3px">ENCY</text>
 </svg>
