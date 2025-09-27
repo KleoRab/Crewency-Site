@@ -115,7 +115,7 @@ export default function ContentPage() {
       '💡 Pro tip: The best time to post on LinkedIn is Tuesday-Thursday between 8-10 AM. What is your go-to posting strategy? #socialmediamarketing #tips #engagement',
       '🎯 Behind the scenes: Our team is working on something amazing! Can not wait to show you what we have been building. #teamwork #innovation #comingsoon',
       '📊 Did you know? Posts with images get 2.3x more engagement than text-only posts. Visual content is key! #contentmarketing #socialmedia #stats',
-      '🔥 Customer spotlight: "Crewency helped us increase our social media engagement by 300%!" - Sarah from TechCorp. #customersuccess #testimonial #results'
+      '🔥 Customer spotlight: Crewency helped us increase our social media engagement by 300%! - Sarah from TechCorp. #customersuccess #testimonial #results'
     ];
     
     setTimeout(() => {
