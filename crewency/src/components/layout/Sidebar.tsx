@@ -10,10 +10,10 @@ import {
   ChartBarIcon,
   CogIcon,
   UserGroupIcon,
-  PlusIcon,
   ChevronLeftIcon,
   ChevronRightIcon,
   LinkIcon,
+  CpuChipIcon,
 } from '@heroicons/react/24/outline';
 
 interface SidebarProps {
@@ -23,7 +23,7 @@ interface SidebarProps {
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
-  { name: 'Content', href: '/content', icon: PlusIcon },
+  { name: 'AI Agent', href: '/ai-agent', icon: CpuChipIcon, primary: true },
   { name: 'Schedule', href: '/schedule', icon: CalendarIcon },
   { name: 'Analytics', href: '/analytics', icon: ChartBarIcon },
   { name: 'Accounts', href: '/accounts', icon: LinkIcon },
@@ -82,35 +82,51 @@ export default function Sidebar({ isCollapsed, onToggle }: SidebarProps) {
 
       {/* Navigation */}
       <nav className="flex-1 px-4 py-4 space-y-1">
-        {navigation.map((item) => {
-          const isActive = pathname === item.href;
-          return (
-            <Link
-              key={item.name}
-              href={item.href}
-              className={`group flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
-                isActive
-                  ? 'bg-blue-50 text-blue-700'
-                  : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
-              }`}
-            >
-              <item.icon
-                className={`mr-3 h-5 w-5 flex-shrink-0 ${
-                  isActive ? 'text-blue-500' : 'text-gray-400 group-hover:text-gray-500'
-                }`}
-              />
-              {!isCollapsed && (
-                <motion.span
-                  initial={false}
-                  animate={{ opacity: isCollapsed ? 0 : 1 }}
-                  className="truncate"
+            {navigation.map((item) => {
+              const isActive = pathname === item.href;
+              const isPrimary = item.primary;
+              return (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className={`group flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                    isActive
+                      ? isPrimary
+                        ? 'bg-gradient-to-r from-purple-50 to-blue-50 text-purple-700 border border-purple-200'
+                        : 'bg-blue-50 text-blue-700'
+                      : isPrimary
+                      ? 'text-purple-700 hover:bg-gradient-to-r hover:from-purple-50 hover:to-blue-50 hover:text-purple-800'
+                      : 'text-gray-700 hover:bg-gray-50 hover:text-gray-900'
+                  }`}
                 >
-                  {item.name}
-                </motion.span>
-              )}
-            </Link>
-          );
-        })}
+                  <item.icon
+                    className={`mr-3 h-5 w-5 flex-shrink-0 ${
+                      isActive 
+                        ? isPrimary 
+                          ? 'text-purple-500' 
+                          : 'text-blue-500'
+                        : isPrimary
+                        ? 'text-purple-400 group-hover:text-purple-500'
+                        : 'text-gray-400 group-hover:text-gray-500'
+                    }`}
+                  />
+                  {!isCollapsed && (
+                    <motion.span
+                      initial={false}
+                      animate={{ opacity: isCollapsed ? 0 : 1 }}
+                      className="truncate"
+                    >
+                      {item.name}
+                      {isPrimary && (
+                        <span className="ml-2 px-2 py-0.5 text-xs bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-full">
+                          AI
+                        </span>
+                      )}
+                    </motion.span>
+                  )}
+                </Link>
+              );
+            })}
       </nav>
 
       {/* Footer */}
