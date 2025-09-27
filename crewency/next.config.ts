@@ -5,8 +5,10 @@ const nextConfig: NextConfig = {
     // Enable experimental features if needed
   },
   images: {
-    domains: ['localhost', 'crewency-site-ca68zo6db-crewencys-projects.vercel.app'],
+    domains: ['localhost', 'crewency-site.vercel.app'],
   },
+  // Fix lockfile detection issue
+  outputFileTracingRoot: process.cwd(),
   // Handle environment variables
   env: {
     CUSTOM_KEY: process.env.CUSTOM_KEY,
