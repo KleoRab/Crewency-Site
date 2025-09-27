@@ -26,13 +26,13 @@ export default function Header({ user, onLogout }: HeaderProps) {
       <div className="flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
-          <Link href="/" className="flex items-center space-x-3">
+          <Link href="/" className="flex items-center">
             <Image
               src="/crewency-logo.svg"
               alt="Crewency"
-              width={120}
-              height={36}
-              className="h-9 w-auto"
+              width={140}
+              height={40}
+              className="h-10 w-auto"
             />
           </Link>
         </div>
