@@ -1,90 +1,52 @@
-# Crewency - AI-Powered Social Media Manager
+# Crewency - Modular SaaS Platform
 
-A modular SaaS platform for managing social media with AI-powered content generation and scheduling. Built for SMBs and agencies with extensibility in mind.
+A modern, modular SaaS platform built with Next.js and TypeScript. Starting with an AI-powered Social Media Manager for SMBs and agencies, with plans to expand into additional business modules.
 
 ## 🚀 Features
 
-### Current MVP Features (Social Manager Module)
+### Social Media Manager Module (Current)
+- **AI Content Generation**: Generate engaging captions, hashtags, and content ideas
+- **Multi-Platform Scheduling**: Schedule posts across Facebook, LinkedIn, Twitter, Instagram, and more
+- **Advanced Analytics**: Track performance, engagement, and growth with detailed insights
+- **Team Collaboration**: Manage multiple users and clients with role-based permissions
+- **Visual Calendar**: Intuitive calendar interface for content planning
+- **Content Types**: Support for text, image, and video posts
 
-- **User Management**: Multi-tenant support with role-based permissions (Admin, Editor, Viewer, Owner)
-- **Account Integration**: Connect up to 3 social accounts (per free tier) with OAuth2
-- **Scheduling**: Visual calendar UI for scheduling posts with recurring campaigns
-- **AI Content Generation**: Stub endpoints for captions, hashtags, images, and video prompts
-- **Analytics & Alerts**: Track engagement, reach, follower growth, and sentiment
-- **Admin Dashboard**: User management and system monitoring
-- **Security & Compliance**: GDPR-compliant with encrypted data storage
-
-### Supported Social Platforms
-
-- Facebook & Instagram
-- LinkedIn
-- X (Twitter)
-- TikTok (stub)
-- YouTube (stub)
-- Threads (stub)
-- Reddit (stub)
-- Pinterest (stub)
-- Tumblr (stub)
+### Planned Modules
+- **Technician Agent**: AI-powered IT support and technician services for MSPs
+- **Additional modules** will be added based on user needs and market demand
 
 ## 🏗️ Architecture
 
 ### Frontend
-- **Framework**: Next.js 14 with App Router
-- **Language**: TypeScript
-- **Styling**: TailwindCSS with custom brand colors
-- **Animations**: Framer Motion
-- **State Management**: React hooks + Context (future: Zustand/Redux)
+- **Next.js 15** with App Router
+- **TypeScript** for type safety
+- **TailwindCSS** for styling with custom design system
+- **Framer Motion** for smooth animations
+- **Heroicons** for consistent iconography
 
 ### Backend
-- **API**: Next.js API routes
-- **Database**: PostgreSQL via Supabase
-- **Authentication**: Supabase Auth + NextAuth.js
-- **File Storage**: Supabase Storage (future)
+- **Next.js API Routes** for serverless functions
+- **PostgreSQL** database via Supabase
+- **NextAuth.js** for authentication
+- **OAuth2** integration for social account linking
 
-### Database Schema
-- Multi-tenant organizations
-- Role-based user management
-- OAuth account linking
-- Scheduled posts with platform-specific data
-- Analytics and audit logging
-- Row Level Security (RLS) enabled
-
-## 📁 Project Structure
-
+### Modular Structure
 ```
-crewency/
-├── src/
-│   ├── app/                    # Next.js App Router
-│   │   ├── api/               # API routes
-│   │   ├── auth/              # Authentication pages
-│   │   ├── dashboard/         # Dashboard pages
-│   │   └── schedule/          # Scheduling pages
-│   ├── components/            # Reusable UI components
-│   │   ├── layout/           # Layout components
-│   │   ├── ui/               # Basic UI components
-│   │   └── forms/            # Form components
-│   ├── modules/              # Modular feature organization
-│   │   ├── social-manager/   # Social media management module
-│   │   │   ├── components/   # Module-specific components
-│   │   │   ├── pages/        # Module pages
-│   │   │   ├── services/     # Social media API services
-│   │   │   ├── types/        # Module types
-│   │   │   └── utils/        # Module utilities
-│   │   └── technician-agent/ # Future MSP module (stub)
-│   ├── lib/                  # Shared utilities
-│   │   ├── auth/            # Authentication utilities
-│   │   ├── database/        # Database configuration
-│   │   └── utils/           # General utilities
-│   ├── types/               # Global TypeScript types
-│   └── constants/           # Application constants
-├── .env.local.example       # Environment variables template
-└── README.md
+src/
+├── modules/
+│   ├── social-manager/     # Current module
+│   │   ├── pages/         # React components
+│   │   └── services/      # API integrations
+│   └── technician-agent/  # Future module (stub)
+├── components/            # Shared UI components
+├── lib/                   # Utilities and configurations
+└── types/                 # TypeScript definitions
 ```
 
-## 🚀 Getting Started
+## 🛠️ Getting Started
 
 ### Prerequisites
-
 - Node.js 18+ 
 - npm or yarn
 - PostgreSQL database (or Supabase account)
@@ -104,19 +66,32 @@ crewency/
 
 3. **Set up environment variables**
    ```bash
-   cp .env.local.example .env.local
+   cp .env.example .env.local
    ```
    
-   Fill in your environment variables:
-   - `NEXT_PUBLIC_SUPABASE_URL`: Your Supabase project URL
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`: Your Supabase anon key
-   - `SUPABASE_SERVICE_ROLE_KEY`: Your Supabase service role key
-   - OAuth provider credentials (Google, LinkedIn, Facebook)
+   Configure the following variables:
+   ```env
+   # Database
+   DATABASE_URL=your_postgresql_url
+   
+   # Authentication
+   NEXTAUTH_SECRET=your_secret_key
+   NEXTAUTH_URL=http://localhost:3000
+   
+   # Social Media APIs
+   FACEBOOK_APP_ID=your_facebook_app_id
+   FACEBOOK_APP_SECRET=your_facebook_app_secret
+   LINKEDIN_CLIENT_ID=your_linkedin_client_id
+   LINKEDIN_CLIENT_SECRET=your_linkedin_client_secret
+   TWITTER_CLIENT_ID=your_twitter_client_id
+   TWITTER_CLIENT_SECRET=your_twitter_client_secret
+   INSTAGRAM_APP_ID=your_instagram_app_id
+   INSTAGRAM_APP_SECRET=your_instagram_app_secret
+   ```
 
 4. **Set up the database**
    ```bash
-   # Run the schema.sql file in your PostgreSQL database
-   # Or use Supabase SQL editor to execute the schema
+   npm run db:setup
    ```
 
 5. **Start the development server**
@@ -127,95 +102,94 @@ crewency/
 6. **Open your browser**
    Navigate to [http://localhost:3000](http://localhost:3000)
 
-## 🔧 Configuration
+## 📱 Available Pages
 
-### Supabase Setup
+### Public Pages
+- **Home** (`/`) - Landing page with features and pricing
+- **Login** (`/auth/login`) - User authentication
+- **Register** (`/auth/register`) - User registration
 
-1. Create a new Supabase project
-2. Run the provided `schema.sql` in the SQL editor
-3. Enable Row Level Security (RLS) policies
-4. Set up OAuth providers in Authentication settings
-
-### OAuth Providers
-
-Configure the following OAuth providers:
-
-- **Google**: Google Cloud Console
-- **LinkedIn**: LinkedIn Developer Portal
-- **Facebook**: Facebook Developers
-
-## 📊 Database Schema
-
-The database is designed with modularity and scalability in mind:
-
-- **Organizations**: Multi-tenant support
-- **Users**: Role-based access control
-- **OAuth Accounts**: Social media account linking
-- **Scheduled Posts**: Cross-platform content scheduling
-- **Analytics**: Performance tracking and insights
-- **Audit Logs**: Compliance and security tracking
+### Dashboard Pages
+- **Dashboard** (`/dashboard`) - Main social media dashboard
+- **Schedule** (`/schedule`) - Content scheduling calendar
+- **Admin** (`/admin`) - Admin dashboard for user management
 
 ## 🎨 Design System
 
-### Brand Colors
-- Primary: Deep-to-light blues from Crewency logo
-- Secondary: Complementary blue tones
-- Platform-specific colors for social media icons
+### Colors
+- **Primary**: Deep to light blues (#1e40af to #dbeafe)
+- **Secondary**: Grays and neutrals
+- **Accent**: Platform-specific colors for social media
 
 ### Components
-- Reusable UI components with TailwindCSS
-- Framer Motion animations
-- Responsive design (mobile-first)
-- Accessibility compliant
+- Consistent button styles and form elements
+- Responsive grid layouts
+- Smooth animations and transitions
+- Accessible design patterns
 
-## 🔐 Security Features
+## 🔧 Development
 
-- **Authentication**: Supabase Auth with JWT tokens
-- **Authorization**: Role-based permissions
-- **Data Encryption**: All sensitive data encrypted
-- **GDPR Compliance**: Data privacy controls
-- **Audit Logging**: Complete action tracking
-- **Rate Limiting**: API protection (future)
+### Available Scripts
+```bash
+npm run dev          # Start development server
+npm run build        # Build for production
+npm run start        # Start production server
+npm run lint         # Run ESLint
+npm run type-check   # Run TypeScript type checking
+```
+
+### Code Structure
+- **Components**: Reusable UI components in `/components`
+- **Modules**: Feature-specific code in `/modules`
+- **Types**: TypeScript definitions in `/types`
+- **Utils**: Helper functions in `/lib`
+
+### Adding New Modules
+1. Create a new folder in `/src/modules/`
+2. Follow the established structure:
+   ```
+   module-name/
+   ├── pages/        # React components
+   ├── services/     # API integrations
+   └── README.md     # Module documentation
+   ```
+3. Update the main navigation to include the new module
+4. Add module-specific routes in the app directory
 
 ## 🚀 Deployment
 
 ### Vercel (Recommended)
-
 1. Connect your GitHub repository to Vercel
-2. Set environment variables in Vercel dashboard
-3. Deploy automatically on push to main branch
+2. Configure environment variables in Vercel dashboard
+3. Deploy automatically on every push to main branch
 
 ### Other Platforms
+- **AWS**: Use AWS Amplify or custom serverless setup
+- **Netlify**: Configure for Next.js static export
+- **Docker**: Use the included Dockerfile for containerized deployment
 
-- **AWS**: Use Vercel or deploy to AWS Lambda
-- **Railway**: Full-stack deployment
-- **DigitalOcean**: App Platform
+## 📊 Database Schema
 
-## 📈 Roadmap
+### Core Tables
+- **users**: User accounts and profiles
+- **organizations**: Company/agency information
+- **social_accounts**: Connected social media accounts
+- **scheduled_posts**: Content scheduling data
+- **analytics**: Performance metrics and insights
 
-### Phase 1 (Current)
-- ✅ Full-stack scaffold with auth
-- ✅ Scheduling UI and dashboard
-- ✅ API service stubs
-- ✅ Multi-tenant architecture
+### Sample Data
+Use the provided seed scripts to populate the database with sample data:
+```bash
+npm run db:seed
+```
 
-### Phase 2 (Next)
-- [ ] Complete analytics dashboard
-- [ ] AI content generation integration
-- [ ] Advanced scheduling features
-- [ ] Mobile responsiveness
+## 🔐 Security
 
-### Phase 3 (Future)
-- [ ] Advanced automations
-- [ ] Additional social networks
-- [ ] Mobile apps
-- [ ] MSP Technician Agent module
-
-### Phase 4 (Long-term)
-- [ ] White-label solutions
-- [ ] Enterprise features
-- [ ] Advanced AI capabilities
-- [ ] Third-party integrations
+- **Authentication**: Secure JWT-based authentication
+- **Authorization**: Role-based access control (RBAC)
+- **Data Encryption**: All sensitive data encrypted at rest
+- **API Security**: Rate limiting and input validation
+- **GDPR Compliance**: Built-in privacy controls
 
 ## 🤝 Contributing
 
@@ -231,17 +205,29 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 🆘 Support
 
-- **Documentation**: [docs.crewency.com](https://docs.crewency.com)
-- **Issues**: [GitHub Issues](https://github.com/crewency/crewency/issues)
-- **Email**: support@crewency.com
+- **Documentation**: Check the `/docs` folder for detailed guides
+- **Issues**: Report bugs and request features via GitHub Issues
+- **Discussions**: Join community discussions in GitHub Discussions
 
-## 🙏 Acknowledgments
+## 🗺️ Roadmap
 
-- Next.js team for the amazing framework
-- Supabase for the backend infrastructure
-- TailwindCSS for the utility-first CSS
-- Framer Motion for smooth animations
-- All contributors and early adopters
+### Phase 1 (Current)
+- ✅ Complete social media manager module
+- ✅ User authentication and authorization
+- ✅ Basic scheduling and analytics
+- ✅ Admin dashboard
+
+### Phase 2 (Next)
+- [ ] AI content generation integration
+- [ ] Advanced analytics and reporting
+- [ ] Mobile app (React Native)
+- [ ] API rate limiting and optimization
+
+### Phase 3 (Future)
+- [ ] Technician Agent module
+- [ ] Additional business modules
+- [ ] Enterprise features
+- [ ] White-label solutions
 
 ---
 
