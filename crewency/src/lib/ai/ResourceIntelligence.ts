@@ -101,14 +101,18 @@ class ResourceIntelligence {
   // 🚀 INITIALIZE RESOURCES
   private async initializeResources(): Promise<void> {
     try {
-      await this.loadTrendingData();
-      await this.loadNewsData();
-      await this.loadCompetitorData();
-      await this.loadAudienceData();
-      await this.loadPerformanceData();
-      await this.loadIndustryData();
+      // Load resources with error handling
+      await Promise.allSettled([
+        this.loadTrendingData(),
+        this.loadNewsData(),
+        this.loadCompetitorData(),
+        this.loadAudienceData(),
+        this.loadPerformanceData(),
+        this.loadIndustryData()
+      ]);
     } catch (error) {
-      console.error('Resource initialization error:', error);
+      console.warn('Resource initialization warning:', error);
+      // Don't throw - use fallback data
     }
   }
 

@@ -52,7 +52,12 @@ class RealTimeAPIs {
   private rateLimits: Map<string, number> = new Map();
 
   constructor() {
-    this.initializeAPIs();
+    try {
+      this.initializeAPIs();
+    } catch (error) {
+      console.warn('API initialization warning:', error);
+      // Continue with empty configs - fallback to mock data
+    }
   }
 
   // 🚀 INITIALIZE APIs

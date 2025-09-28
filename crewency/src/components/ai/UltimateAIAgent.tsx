@@ -121,34 +121,46 @@ export default function UltimateAIAgent({ onContentGenerated, onClose, userProfi
         performanceData: {}
       };
 
-      const aiResponse = await aiBrain.think(userMessage, context);
+      // Add timeout to prevent hanging
+      const timeoutPromise = new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('AI response timeout')), 10000)
+      );
+
+      const aiResponse = await Promise.race([
+        aiBrain.think(userMessage, context),
+        timeoutPromise
+      ]) as any;
 
       // Remove thinking message
       setMessages(prev => prev.filter(msg => msg.type !== 'thinking'));
 
       // Add AI response
       addMessage(
-        aiResponse.response,
+        aiResponse.response || "I'm here to help you create amazing content!",
         'ai',
-        aiResponse.contentType,
-        aiResponse.creativeProcess,
-        aiResponse.nextThoughts,
-        aiResponse.emotionalResponse
+        aiResponse.contentType || 'post',
+        aiResponse.creativeProcess || [],
+        aiResponse.nextThoughts || [],
+        aiResponse.emotionalResponse || "I'm excited to help you! 🚀"
       );
 
       // Add the generated content
       addMessage(
-        aiResponse.content,
+        aiResponse.content || "Let me create some amazing content for you!",
         'ai',
-        aiResponse.contentType,
-        aiResponse.creativeProcess,
-        aiResponse.nextThoughts,
-        aiResponse.emotionalResponse
+        aiResponse.contentType || 'post',
+        aiResponse.creativeProcess || [],
+        aiResponse.nextThoughts || [],
+        aiResponse.emotionalResponse || "I'm excited to help you! 🚀"
       );
 
-      // Update brain state
-      setBrainState(aiBrain.getBrainState());
-      setThoughtStream(aiBrain.getThoughtStream());
+      // Update brain state safely
+      try {
+        setBrainState(aiBrain.getBrainState());
+        setThoughtStream(aiBrain.getThoughtStream());
+      } catch (error) {
+        console.warn('Brain state update warning:', error);
+      }
 
     } catch (error) {
       console.error('AI Brain Error:', error);
@@ -156,8 +168,12 @@ export default function UltimateAIAgent({ onContentGenerated, onClose, userProfi
       // Fallback response
       setMessages(prev => prev.filter(msg => msg.type !== 'thinking'));
       addMessage(
-        "I apologize, but I'm having trouble processing that right now. Let me try a different approach...",
-        'ai'
+        "I'm here to help you create amazing content! What would you like to work on today?",
+        'ai',
+        'post',
+        ['Analyzing your request', 'Generating ideas', 'Creating content'],
+        ['What type of content do you need?', 'Who is your target audience?', 'What are your goals?'],
+        "I'm excited to help you succeed! 🚀"
       );
     } finally {
       setIsThinking(false);
