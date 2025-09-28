@@ -19,6 +19,7 @@ import {
   MicrophoneIcon,
   EyeIcon,
 } from '@heroicons/react/24/outline';
+import OpenAIService from '@/lib/ai/openai';
 
 interface Message {
   id: string;
@@ -91,6 +92,15 @@ export default function EnhancedAIAgent({ onContentGenerated, onClose, userProfi
   const [profile, setProfile] = useState<Partial<UserProfile>>(userProfile || {});
   const [isMinimized, setIsMinimized] = useState(false);
   const [quickActions, setQuickActions] = useState<string[]>([]);
+  const [aiService] = useState(() => new OpenAIService());
+  const [conversationContext, setConversationContext] = useState<AIConversationContext>({
+    industry: userProfile?.industry || '',
+    brandVoice: userProfile?.brandVoice || '',
+    contentGoals: userProfile?.contentGoals || [],
+    targetAudience: userProfile?.targetAudience || '',
+    businessSize: userProfile?.businessSize || '',
+    previousMessages: []
+  });
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -211,126 +221,124 @@ What's the main topic or message you want to share?`,
   const handleSendMessage = async () => {
     if (!inputMessage.trim()) return;
 
-    addMessage(inputMessage, 'user');
-    const userMessage = inputMessage.toLowerCase();
+    const userMessage = inputMessage.trim();
+    addMessage(userMessage, 'user');
     setInputMessage('');
 
-    // Advanced AI Response Logic based on context
-    let aiResponse = '';
-    let suggestions: string[] = [];
-    let contentType = 'text';
+    // Update conversation context
+    const updatedContext = {
+      ...conversationContext,
+      previousMessages: [
+        ...conversationContext.previousMessages,
+        { role: 'user' as const, content: userMessage }
+      ]
+    };
+    setConversationContext(updatedContext);
 
-    if (currentStep === 1) {
-      // Industry-specific follow-up
-      const industryData = industries.find(i => i.id === profile.industry);
-      aiResponse = `Great! "${inputMessage}" is important for ${industryData?.name} businesses. 
+    setIsTyping(true);
 
-${industryData?.questions[1] || 'What makes your business unique?'}`;
-      suggestions = industryData?.questions.slice(2) || [];
-    } else if (currentStep === 2) {
-      // Brand voice and goals
-      aiResponse = `Perfect! I can see you're focused on ${userMessage}. 
+    try {
+      // Call real AI service
+      const aiResponse = await aiService.generateResponse(
+        userMessage,
+        updatedContext,
+        currentStep
+      );
 
-What's your target audience? Be specific - age, profession, interests, pain points.`;
-      suggestions = ['Small business owners', 'Marketing professionals', 'Tech enthusiasts', 'Healthcare workers', 'Students', 'Entrepreneurs'];
-    } else if (currentStep === 3) {
-      // Content creation
-      aiResponse = `Excellent topic! "${inputMessage}" will resonate well with your audience.
-
-What's the main benefit or value proposition you want to highlight?`;
-      suggestions = ['Saves time', 'Increases efficiency', 'Solves problems', 'Saves money', 'Improves results', 'Reduces stress'];
-    } else if (currentStep === 4) {
-      // Value proposition
-      aiResponse = `Perfect! "${inputMessage}" is a compelling benefit.
-
-What's your call-to-action? What do you want people to do after seeing this content?`;
-      suggestions = ['Sign up for free trial', 'Visit our website', 'Download our app', 'Follow us', 'Share this post', 'Contact us'];
-    } else if (currentStep === 5) {
-      // Call-to-action
-      aiResponse = `Excellent! Now I have everything I need to create amazing content for you.
-
-Let me generate some options tailored to your ${profile.industry} business, ${profile.brandVoice} brand voice, and ${profile.contentGoals?.join(', ')} goals...`;
-      setCurrentStep(6);
+      // Add AI response to messages
+      addMessage(aiResponse.response, 'ai', aiResponse.suggestions);
       
-      // Generate content
-      setTimeout(() => {
-        generateContextualContent();
-      }, 2000);
-    }
+      // Update conversation context with AI response
+      setConversationContext(prev => ({
+        ...prev,
+        previousMessages: [
+          ...prev.previousMessages,
+          { role: 'assistant' as const, content: aiResponse.response }
+        ]
+      }));
 
-    if (aiResponse) {
-      await simulateAITyping(aiResponse, suggestions, contentType);
+      // Update step if provided
+      if (aiResponse.nextStep !== undefined) {
+        setCurrentStep(aiResponse.nextStep);
+      } else if (aiResponse.shouldContinue) {
+        setCurrentStep(prev => prev + 1);
+      }
+
+      // If this is the content generation step, generate actual content
+      if (currentStep >= 5 || !aiResponse.shouldContinue) {
+        setTimeout(() => {
+          generateContextualContent();
+        }, 1000);
+      }
+
+    } catch (error) {
+      console.error('AI Service Error:', error);
+      
+      // Fallback to simulated response
+      const fallbackResponse = getFallbackResponse(userMessage, currentStep);
+      addMessage(fallbackResponse.response, 'ai', fallbackResponse.suggestions);
       setCurrentStep(prev => prev + 1);
+    } finally {
+      setIsTyping(false);
     }
   };
 
   const generateContextualContent = async () => {
     setIsTyping(true);
     
-    // Simulate AI content generation based on user profile
-    await new Promise(resolve => setTimeout(resolve, 3000));
-    
-    const industry = profile.industry;
-    const brandVoice = profile.brandVoice;
-    const goals = profile.contentGoals;
-    
-    let generatedContent = '';
-    let contentType = 'post';
-    
-    // Generate content based on industry and brand voice
-    if (industry === 'saas') {
-      if (brandVoice === 'professional') {
-        generatedContent = `🚀 Introducing the next generation of AI-powered social media management.
-
-Our platform delivers:
-✅ 10x faster content creation
-✅ 300% increase in engagement
-✅ 50% reduction in management time
-
-Join 10,000+ businesses already transforming their social presence.
-
-Ready to scale your social media strategy? Start your free trial today.
-
-#SaaS #SocialMedia #AI #Productivity #BusinessGrowth`;
-      } else if (brandVoice === 'friendly') {
-        generatedContent = `Hey there! 👋 
-
-We just launched something pretty cool - an AI assistant that actually gets social media (unlike that one friend who posts 47 selfies a day 😅).
-
-What if I told you could:
-• Create content in minutes, not hours
-• Never run out of post ideas again
-• Actually enjoy managing your socials
-
-Sound too good to be true? Try it free for 14 days - no credit card needed!
-
-#SocialMedia #AI #SmallBusiness #Marketing #Fun`;
-      }
-    } else if (industry === 'ecommerce') {
-      generatedContent = `🛍️ NEW ARRIVAL ALERT! 
-
-Just dropped: Our best-selling collection is back in stock (and it's flying off the shelves!)
-
-✨ What makes it special:
-• Premium quality materials
-• Perfect fit guarantee
-• Free shipping on orders $50+
-• 30-day return policy
-
-Don't wait - limited quantities available!
-
-Shop now: [link in bio]
-
-#NewArrival #Fashion #Ecommerce #Sale #LimitedEdition`;
+    try {
+      // Use real AI to generate content
+      const contentType = 'post'; // You can make this dynamic based on user selection
+      const generatedContent = await aiService.generateContent(conversationContext, contentType);
+      
+      addAIMessage(
+        `🎉 Here's your custom content, perfectly tailored for your ${conversationContext.industry} business!\n\n${generatedContent}`,
+        ['Regenerate', 'Edit', 'Use this content', 'Create another', 'Save to templates'],
+        contentType
+      );
+      
+    } catch (error) {
+      console.error('Content generation error:', error);
+      
+      // Fallback content
+      const fallbackContent = getFallbackContent(conversationContext);
+      addAIMessage(
+        `🎉 Here's your custom content!\n\n${fallbackContent}`,
+        ['Regenerate', 'Edit', 'Use this content', 'Create another', 'Save to templates'],
+        'post'
+      );
+    } finally {
+      setIsTyping(false);
     }
+  };
+
+  // Helper functions
+  const getFallbackResponse = (userMessage: string, step: number) => {
+    const fallbackResponses = {
+      0: { response: "Great! I'd love to help you create amazing social media content. What industry are you in?", suggestions: industries.map(i => i.name) },
+      1: { response: "Perfect! Who is your target audience for this content?", suggestions: ['Small business owners', 'Marketing professionals', 'Tech enthusiasts', 'General audience'] },
+      2: { response: "Excellent! What are your main content goals?", suggestions: contentGoals.slice(0, 5) },
+      3: { response: "Awesome! What type of content would you like to create today?", suggestions: ['Social Media Post', 'Instagram Story', 'Video Script', 'LinkedIn Article'] },
+      4: { response: "Perfect! Let me create some amazing content for you...", suggestions: ['Regenerate', 'Edit', 'Use this content'] },
+      5: { response: "Here's your custom content! Would you like me to make any adjustments?", suggestions: ['Regenerate', 'Edit', 'Use this content', 'Create another'] }
+    };
     
-    addAIMessage(
-      `🎉 Here's your custom content, perfectly tailored for your ${profile.industry} business!\n\n${generatedContent}`,
-      ['Regenerate', 'Edit', 'Use this content', 'Create another', 'Save to templates'],
-      contentType
-    );
-    
-    setIsTyping(false);
+    return fallbackResponses[step as keyof typeof fallbackResponses] || fallbackResponses[0];
+  };
+
+  const getFallbackContent = (context: AIConversationContext): string => {
+    return `🚀 Exciting news from our ${context.industry} business! 
+
+We're thrilled to share something amazing that will help ${context.targetAudience} achieve their goals.
+
+✨ Key benefits:
+• Professional results
+• Time-saving solutions  
+• Proven success
+
+Ready to get started? Let's connect!
+
+#${context.industry} #${context.brandVoice} #BusinessGrowth`;
   };
 
   const handleAction = (action: string) => {
