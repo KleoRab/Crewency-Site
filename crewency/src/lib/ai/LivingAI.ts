@@ -1,8 +1,8 @@
 // 🧠 LIVING AI BRAIN FOR CREWENCY
 // This is where Crewency comes to life - a truly intelligent AI that thinks, learns, and creates
 
-import ResourceIntelligence from './ResourceIntelligence';
-import RealTimeAPIs from './RealTimeAPIs';
+import LocalIntelligence from './LocalIntelligence';
+import LocalContentGenerator from './LocalContentGenerator';
 
 interface AIPersonality {
   creativity: number; // 0-100
@@ -44,8 +44,8 @@ class LivingAI {
   private learning: AILearning;
   private isThinking: boolean = false;
   private currentContext: ContentContext | null = null;
-  private resourceIntelligence: ResourceIntelligence;
-  private realTimeAPIs: RealTimeAPIs;
+  private localIntelligence: LocalIntelligence;
+  private contentGenerator: LocalContentGenerator;
 
   constructor() {
     this.personality = {
@@ -66,12 +66,12 @@ class LivingAI {
       conversationHistory: []
     };
 
-    // Initialize resource intelligence with error handling
+    // Initialize local intelligence system
     try {
-      this.resourceIntelligence = new ResourceIntelligence();
-      this.realTimeAPIs = new RealTimeAPIs();
+      this.localIntelligence = new LocalIntelligence();
+      this.contentGenerator = new LocalContentGenerator();
     } catch (error) {
-      console.warn('AI initialization warning:', error);
+      console.warn('Local Intelligence initialization warning:', error);
       // Continue with fallback behavior
     }
   }
@@ -88,15 +88,15 @@ class LivingAI {
     this.isThinking = true;
     this.currentContext = context;
 
-    // Step 1: Get real-time intelligence and resources (with fallbacks)
+    // Step 1: Get local intelligence and resources (PC-powered)
     let intelligence, trendingTopics, newsArticles;
     
     try {
-      intelligence = await this.resourceIntelligence?.getIntelligentInsights(context) || this.getFallbackIntelligence();
-      trendingTopics = await this.realTimeAPIs?.getTrendingTopics() || [];
-      newsArticles = await this.realTimeAPIs?.getNewsArticles(userInput, context.industry) || [];
+      intelligence = await this.localIntelligence?.getIntelligentInsights(context) || this.getFallbackIntelligence();
+      trendingTopics = intelligence.trends || [];
+      newsArticles = intelligence.news || [];
     } catch (error) {
-      console.warn('Resource loading warning:', error);
+      console.warn('Local Intelligence loading warning:', error);
       intelligence = this.getFallbackIntelligence();
       trendingTopics = [];
       newsArticles = [];
@@ -114,8 +114,8 @@ class LivingAI {
     // Step 5: Choose the best approach based on personality, learning, and real data
     const chosenApproach = await this.chooseBestApproach(creativeIdeas, context, intelligence);
     
-    // Step 6: Create the actual content with real insights
-    const content = await this.createContent(chosenApproach, context, intelligence, newsArticles);
+    // Step 6: Create the actual content with local AI generator
+    const content = await this.createContentWithLocalAI(userInput, context, intelligence, chosenApproach);
     
     // Step 7: Learn from this interaction
     await this.learnFromInteraction(userInput, content, context);
@@ -584,6 +584,66 @@ Slide 10: "${approach.callToAction}"
   // 🧠 IS THINKING
   isCurrentlyThinking(): boolean {
     return this.isThinking;
+  }
+
+  // 🎨 CREATE CONTENT WITH LOCAL AI
+  private async createContentWithLocalAI(userInput: string, context: ContentContext, intelligence: any, chosenApproach: any): Promise<string> {
+    try {
+      if (!this.contentGenerator) {
+        return this.createContent(chosenApproach, context);
+      }
+
+      const contentRequest = {
+        type: chosenApproach.type,
+        topic: this.extractTopic(userInput),
+        industry: context.industry,
+        targetAudience: context.targetAudience,
+        brandVoice: context.brandVoice,
+        goals: context.businessGoals,
+        context: intelligence
+      };
+
+      const generatedContent = await this.contentGenerator.generateContent(contentRequest);
+      
+      // Format the content for display
+      let formattedContent = generatedContent.content;
+      
+      // Add visual and audio elements if it's a video
+      if (chosenApproach.type === 'video') {
+        formattedContent += `\n\n[VISUAL ELEMENTS]\n${generatedContent.visualElements.map(el => `- ${el}`).join('\n')}`;
+        formattedContent += `\n\n[AUDIO ELEMENTS]\n${generatedContent.audioElements.map(el => `- ${el}`).join('\n')}`;
+      }
+      
+      // Add engagement strategy
+      formattedContent += `\n\n[ENGAGEMENT STRATEGY]\n${generatedContent.engagementStrategy}`;
+      
+      // Add reasoning
+      formattedContent += `\n\n[AI REASONING]\n${generatedContent.reasoning}`;
+      
+      // Add viral potential and business value
+      formattedContent += `\n\n[METRICS]\nViral Potential: ${generatedContent.viralPotential}/10\nBusiness Value: ${generatedContent.businessValue}/10`;
+      
+      return formattedContent;
+    } catch (error) {
+      console.warn('Local AI content generation warning:', error);
+      return this.createContent(chosenApproach, context);
+    }
+  }
+
+  // 🎯 EXTRACT TOPIC FROM USER INPUT
+  private extractTopic(userInput: string): string {
+    // Simple topic extraction - look for key phrases
+    const topicKeywords = ['about', 'on', 'for', 'regarding', 'concerning'];
+    const words = userInput.toLowerCase().split(' ');
+    
+    for (let i = 0; i < words.length; i++) {
+      if (topicKeywords.includes(words[i]) && i + 1 < words.length) {
+        return words.slice(i + 1, i + 3).join(' ').replace(/[^\w\s]/g, '');
+      }
+    }
+    
+    // Fallback: use first few words as topic
+    return words.slice(0, 3).join(' ').replace(/[^\w\s]/g, '') || 'social media strategy';
   }
 
   // 🛡️ FALLBACK INTELLIGENCE
