@@ -41,6 +41,22 @@ export default function Header({ user, onLogout, showLogo = true }: HeaderProps)
           </div>
         )}
 
+        {/* Navigation */}
+        <div className="flex-1 flex items-center justify-center space-x-8">
+          <Link href="/dashboard" className="text-gray-600 hover:text-gray-900 font-medium">
+            Dashboard
+          </Link>
+          <Link href="/schedule" className="text-gray-600 hover:text-gray-900 font-medium">
+            Schedule
+          </Link>
+          <Link href="/analytics" className="text-gray-600 hover:text-gray-900 font-medium">
+            Analytics
+          </Link>
+          <Link href="/ai-agent" className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:from-purple-700 hover:to-blue-700 transition-all duration-200">
+            🚀 AI Agent
+          </Link>
+        </div>
+
         {/* Search */}
         <div className="flex-1 max-w-lg mx-8">
           <div className="relative">

@@ -1,287 +1,169 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
-import Layout from '@/components/layout/Layout';
-import UltimateAIAgent from '@/components/ai/UltimateAIAgent';
-import { User } from '@/types';
-import {
-  CpuChipIcon,
-  SparklesIcon,
-  LightBulbIcon,
-  ChartBarIcon,
-  CalendarIcon,
-  GlobeAltIcon,
-  UserGroupIcon,
-  CommandLineIcon,
-  BoltIcon,
-  FireIcon,
-} from '@heroicons/react/24/outline';
-import { motion } from 'framer-motion';
-
-// Mock user data for demonstration
-const mockUser: User = {
-  id: '1',
-  email: 'john@company.com',
-  firstName: 'John',
-  lastName: 'Doe',
-  role: 'owner',
-  organizationId: 'org1',
-  createdAt: '2024-01-01T00:00:00Z',
-  updatedAt: '2024-01-01T00:00:00Z',
-  emailVerified: true,
-  status: 'active',
-};
-
-const aiCapabilities = [
-  {
-    title: 'Content Creation',
-    description: 'Generate engaging posts, stories, and videos tailored to your brand',
-    icon: SparklesIcon,
-    color: 'purple',
-    features: ['AI-powered captions', 'Hashtag optimization', 'Multi-platform adaptation', 'Brand voice consistency']
-  },
-  {
-    title: 'Smart Scheduling',
-    description: 'AI determines optimal posting times for maximum engagement',
-    icon: CalendarIcon,
-    color: 'blue',
-    features: ['Optimal timing analysis', 'Cross-platform coordination', 'Content calendar automation', 'Trend-based scheduling']
-  },
-  {
-    title: 'Analytics Intelligence',
-    description: 'Get actionable insights and performance predictions',
-    icon: ChartBarIcon,
-    color: 'green',
-    features: ['Performance predictions', 'Audience insights', 'Content optimization', 'ROI tracking']
-  },
-  {
-    title: 'Community Management',
-    description: 'AI-powered responses and community building',
-    icon: UserGroupIcon,
-    color: 'orange',
-    features: ['Auto-responses', 'Sentiment analysis', 'Community insights', 'Engagement optimization']
-  },
-  {
-    title: 'Trend Analysis',
-    description: 'Stay ahead with real-time trend detection and adaptation',
-    icon: FireIcon,
-    color: 'red',
-    features: ['Trend detection', 'Viral content prediction', 'Competitor analysis', 'Market insights']
-  },
-  {
-    title: 'Brand Optimization',
-    description: 'Continuously improve your brand presence and messaging',
-    icon: BoltIcon,
-    color: 'yellow',
-    features: ['Brand voice refinement', 'Message optimization', 'A/B testing', 'Performance tuning']
-  }
-];
-
-const quickActions = [
-  {
-    title: 'Create Viral Content',
-    description: 'Generate trending content that gets maximum engagement',
-    icon: FireIcon,
-    action: 'viral_content'
-  },
-  {
-    title: 'Plan This Week',
-    description: 'AI creates a complete content calendar for the week',
-    icon: CalendarIcon,
-    action: 'weekly_plan'
-  },
-  {
-    title: 'Analyze Competitors',
-    description: 'Get insights on what your competitors are doing right',
-    icon: ChartBarIcon,
-    action: 'competitor_analysis'
-  },
-  {
-    title: 'Optimize Performance',
-    description: 'Improve your existing content for better results',
-    icon: BoltIcon,
-    action: 'optimize_content'
-  }
-];
+import React, { useState } from 'react';
+import PowerhouseDemo from '../../components/ai/PowerhouseDemo';
 
 export default function AIAgentPage() {
-  const [user, setUser] = useState<User | null>(null);
-  const [isLoading, setIsLoading] = useState(true);
-  const [showAIAgent, setShowAIAgent] = useState(false);
-  const [selectedAction, setSelectedAction] = useState<string | null>(null);
-  const router = useRouter();
-
-  useEffect(() => {
-    // TODO: Implement actual authentication check
-    const timer = setTimeout(() => {
-      setUser(mockUser);
-      setIsLoading(false);
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  const handleLogout = () => {
-    // TODO: Implement actual logout
-    console.log('Logging out...');
-    router.push('/auth/login');
-  };
-
-  const handleAIContentGenerated = (content: string, type: string, context?: any) => {
-    console.log('AI generated content:', { content, type, context });
-    setShowAIAgent(false);
-    setSelectedAction(null);
-  };
-
-  const handleQuickAction = (action: string) => {
-    setSelectedAction(action);
-    setShowAIAgent(true);
-  };
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading AI Agent...</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (!user) {
-    router.push('/auth/login');
-    return null;
-  }
+  const [showDemo, setShowDemo] = useState(false);
 
   return (
-    <Layout user={user} onLogout={handleLogout}>
-      <div className="p-6 bg-gray-50 min-h-screen max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-8">
-          <div className="flex items-center justify-between">
+    <div className="min-h-screen bg-gradient-to-br from-purple-50 to-blue-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center py-6">
             <div>
-              <h1 className="text-4xl font-bold text-gray-900 mb-2">
-                AI Social Media Manager
-              </h1>
-              <p className="text-xl text-gray-600">
-                Your intelligent assistant for creating, scheduling, and optimizing social media content
-              </p>
+              <h1 className="text-3xl font-bold text-gray-900">🚀 V0.1 POWERHOUSE</h1>
+              <p className="text-gray-600">PC-Powered AI with Maximum Creativity</p>
             </div>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => setShowAIAgent(true)}
-              className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 flex items-center space-x-3 shadow-lg hover:shadow-xl"
+            <button
+              onClick={() => setShowDemo(true)}
+              className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-200"
             >
-              <CpuChipIcon className="h-6 w-6" />
-              <span className="text-lg font-semibold">Start AI Conversation</span>
-            </motion.button>
+              Launch AI Agent
+            </button>
           </div>
         </div>
-
-        {/* Quick Actions */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Quick Actions</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {quickActions.map((action, index) => (
-              <motion.button
-                key={action.action}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                whileHover={{ scale: 1.02, y: -2 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => handleQuickAction(action.action)}
-                className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300 text-left group"
-              >
-                <div className="flex items-center space-x-4 mb-4">
-                  <div className="p-3 bg-gradient-to-br from-purple-100 to-blue-100 rounded-lg group-hover:from-purple-200 group-hover:to-blue-200 transition-colors">
-                    <action.icon className="h-6 w-6 text-purple-600" />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900">{action.title}</h3>
-                </div>
-                <p className="text-gray-600">{action.description}</p>
-              </motion.button>
-            ))}
-          </div>
-        </div>
-
-        {/* AI Capabilities */}
-        <div className="mb-8">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">AI Capabilities</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {aiCapabilities.map((capability, index) => (
-              <motion.div
-                key={capability.title}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-white p-6 rounded-xl shadow-sm border border-gray-200 hover:shadow-md transition-all duration-300"
-              >
-                <div className="flex items-center space-x-4 mb-4">
-                  <div className={`p-3 bg-${capability.color}-100 rounded-lg`}>
-                    <capability.icon className={`h-6 w-6 text-${capability.color}-600`} />
-                  </div>
-                  <h3 className="text-lg font-semibold text-gray-900">{capability.title}</h3>
-                </div>
-                <p className="text-gray-600 mb-4">{capability.description}</p>
-                <ul className="space-y-2">
-                  {capability.features.map((feature, featureIndex) => (
-                    <li key={featureIndex} className="flex items-center text-sm text-gray-600">
-                      <div className={`w-2 h-2 bg-${capability.color}-400 rounded-full mr-3`}></div>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-
-        {/* AI Stats */}
-        <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl p-8 text-white">
-          <h2 className="text-2xl font-bold mb-6">Your AI Assistant Stats</h2>
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <div className="text-3xl font-bold mb-2">247</div>
-              <div className="text-purple-200">Posts Created</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold mb-2">89%</div>
-              <div className="text-purple-200">Engagement Rate</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold mb-2">15.2K</div>
-              <div className="text-purple-200">Hours Saved</div>
-            </div>
-            <div className="text-center">
-              <div className="text-3xl font-bold mb-2">4.8★</div>
-              <div className="text-purple-200">AI Rating</div>
-            </div>
-          </div>
-        </div>
-
-        {/* Ultimate AI Agent Modal */}
-        {showAIAgent && (
-          <UltimateAIAgent
-            onContentGenerated={handleAIContentGenerated}
-            onClose={() => {
-              setShowAIAgent(false);
-              setSelectedAction(null);
-            }}
-            userProfile={{
-              industry: 'saas',
-              niche: 'social media management',
-              targetAudience: 'small business owners',
-              brandVoice: 'professional',
-              contentGoals: ['increase brand awareness', 'generate leads'],
-              businessSize: 'small-medium'
-            }}
-          />
-        )}
       </div>
-    </Layout>
+
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        {/* Hero Section */}
+        <div className="text-center mb-16">
+          <h2 className="text-4xl font-bold text-gray-900 mb-6">
+            The Ultimate AI Social Media Solution
+          </h2>
+          <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            Experience the power of local AI with maximum creativity, no API limits, 
+            and expert-level social media management - all running on your PC.
+          </p>
+          <div className="flex justify-center space-x-4">
+            <button
+              onClick={() => setShowDemo(true)}
+              className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-200"
+            >
+              🚀 Start Creating
+            </button>
+            <button className="bg-white text-purple-600 px-8 py-4 rounded-lg font-semibold text-lg border-2 border-purple-600 hover:bg-purple-50 transition-all duration-200">
+              📚 Learn More
+            </button>
+          </div>
+        </div>
+
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="text-3xl mb-4">🧠</div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-3">Local Intelligence</h3>
+            <p className="text-gray-600">
+              Advanced trend analysis, news scraping, and competitor monitoring using PC resources.
+            </p>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="text-3xl mb-4">🎨</div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-3">Maximum Creativity</h3>
+            <p className="text-gray-600">
+              95% creativity level with multi-format content creation and viral potential scoring.
+            </p>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="text-3xl mb-4">🤖</div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-3">Living AI Brain</h3>
+            <p className="text-gray-600">
+              Emotional intelligence, learning system, and personality adaptation for human-like interactions.
+            </p>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="text-3xl mb-4">📊</div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-3">Advanced Analytics</h3>
+            <p className="text-gray-600">
+              Real-time performance tracking, predictive modeling, and ROI calculation.
+            </p>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="text-3xl mb-4">🎯</div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-3">Platform Optimizer</h3>
+            <p className="text-gray-600">
+              Cross-platform content adaptation, optimal posting times, and algorithm optimization.
+            </p>
+          </div>
+
+          <div className="bg-white p-6 rounded-lg shadow-md">
+            <div className="text-3xl mb-4">🔮</div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-3">Trend Analyzer</h3>
+            <p className="text-gray-600">
+              AI-powered trend prediction, viral content identification, and market opportunity detection.
+            </p>
+          </div>
+        </div>
+
+        {/* Stats Section */}
+        <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-lg p-8 text-white mb-16">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center">
+            <div>
+              <div className="text-3xl font-bold mb-2">95%</div>
+              <div className="text-purple-100">Creativity Level</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold mb-2">90%</div>
+              <div className="text-purple-100">Intelligence Level</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold mb-2">88%</div>
+              <div className="text-purple-100">Trendiness Level</div>
+            </div>
+            <div>
+              <div className="text-3xl font-bold mb-2">0</div>
+              <div className="text-purple-100">API Dependencies</div>
+            </div>
+          </div>
+        </div>
+
+        {/* Content Types */}
+        <div className="mb-16">
+          <h3 className="text-2xl font-bold text-gray-900 text-center mb-8">Supported Content Types</h3>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {[
+              { icon: '📝', name: 'Posts' },
+              { icon: '🎬', name: 'Videos' },
+              { icon: '📱', name: 'Stories' },
+              { icon: '🎠', name: 'Carousels' },
+              { icon: '🔴', name: 'Live' },
+              { icon: '🎪', name: 'Reels' }
+            ].map((type, index) => (
+              <div key={index} className="bg-white p-4 rounded-lg shadow-md text-center">
+                <div className="text-2xl mb-2">{type.icon}</div>
+                <div className="text-sm font-medium text-gray-900">{type.name}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* CTA Section */}
+        <div className="text-center">
+          <h3 className="text-2xl font-bold text-gray-900 mb-4">
+            Ready to Experience the Power of V0.1 POWERHOUSE?
+          </h3>
+          <p className="text-gray-600 mb-8">
+            Join thousands of creators and businesses using our PC-powered AI for maximum creativity and results.
+          </p>
+          <button
+            onClick={() => setShowDemo(true)}
+            className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:from-purple-700 hover:to-blue-700 transition-all duration-200"
+          >
+            🚀 Launch AI Agent Now
+          </button>
+        </div>
+      </div>
+
+      {/* Demo Modal */}
+      {showDemo && (
+        <PowerhouseDemo onClose={() => setShowDemo(false)} />
+      )}
+    </div>
   );
 }
