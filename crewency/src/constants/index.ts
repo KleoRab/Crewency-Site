@@ -86,7 +86,7 @@ export const SOCIAL_PLATFORMS: Record<SocialPlatform, {
     apiEndpoint: 'https://api.linkedin.com/v2',
   },
   twitter: {
-    name: 'X (Twitter)',
+    name: 'X',
     color: '#000000',
     icon: 'twitter',
     limits: {

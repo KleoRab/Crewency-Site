@@ -32,8 +32,8 @@ export const getLinkedInAuthUrl = (config: SocialAuthConfig): string => {
   return `https://www.linkedin.com/oauth/v2/authorization?${params.toString()}`;
 };
 
-// Twitter OAuth 2.0
-export const getTwitterAuthUrl = (config: SocialAuthConfig): string => {
+// X OAuth 2.0
+export const getXAuthUrl = (config: SocialAuthConfig): string => {
   const params = new URLSearchParams({
     response_type: 'code',
     client_id: config.clientId,

@@ -177,7 +177,7 @@ export default function EnhancedAIAgent({ onContentGenerated, onClose, userProfi
     setTimeout(() => {
       simulateAITyping(
         `Great goals! Now I understand your business better. What type of content would you like to create today?`,
-        ['Social Media Post', 'Instagram Story', 'Video Script', 'LinkedIn Article', 'Twitter Thread', 'Content Strategy'],
+        ['Social Media Post', 'Instagram Story', 'Video Script', 'LinkedIn Article', 'X Thread', 'Content Strategy'],
         'content'
       );
       setCurrentStep(3);

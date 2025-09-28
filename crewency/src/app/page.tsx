@@ -21,7 +21,7 @@ const features = [
   },
   {
     name: 'Multi-Platform Scheduling',
-    description: 'Schedule posts across Facebook, LinkedIn, Twitter, Instagram, and more',
+    description: 'Schedule posts across Facebook, LinkedIn, X, Instagram, and more',
     icon: CalendarIcon,
   },
   {

@@ -1,7 +1,7 @@
 import { SocialPlatform, PlatformPostData, PostAnalytics } from '@/types';
 import { SOCIAL_PLATFORMS } from '@/constants';
 
-export class TwitterService {
+export class XService {
   private platform: SocialPlatform = 'twitter';
   private apiEndpoint: string;
   private accessToken?: string;
@@ -11,10 +11,10 @@ export class TwitterService {
     this.apiEndpoint = SOCIAL_PLATFORMS.twitter.apiEndpoint!;
   }
 
-  // Authenticate with Twitter/X
+  // Authenticate with X
   async authenticate(code: string): Promise<{ accessToken: string; refreshToken?: string }> {
-    // TODO: Implement Twitter OAuth 2.0 flow
-    console.log('Twitter authentication with code:', code);
+    // TODO: Implement X OAuth 2.0 flow
+    console.log('X authentication with code:', code);
     return {
       accessToken: 'mock_access_token',
       refreshToken: 'mock_refresh_token',
@@ -24,7 +24,7 @@ export class TwitterService {
   // Refresh access token
   async refreshToken(refreshToken: string): Promise<{ accessToken: string }> {
     // TODO: Implement token refresh
-    console.log('Refreshing Twitter token');
+    console.log('Refreshing X token');
     return {
       accessToken: 'new_mock_access_token',
     };
@@ -40,8 +40,8 @@ export class TwitterService {
     followersCount: number;
     followingCount: number;
   }> {
-    // TODO: Implement Twitter API v2 call
-    console.log('Getting Twitter user profile');
+    // TODO: Implement X API v2 call
+    console.log('Getting X user profile');
     return {
       id: 'mock_user_id',
       username: 'mockuser',
@@ -59,8 +59,8 @@ export class TwitterService {
     postId?: string;
     error?: string;
   }> {
-    // TODO: Implement Twitter posting API
-    console.log('Scheduling Twitter post:', postData);
+    // TODO: Implement X posting API
+    console.log('Scheduling X post:', postData);
     
     // Validate content length
     if (postData.content.length > SOCIAL_PLATFORMS.twitter.limits.maxCharacters) {
@@ -91,14 +91,14 @@ export class TwitterService {
     error?: string;
   }> {
     // TODO: Implement immediate posting
-    console.log('Publishing Twitter post immediately:', postData);
+    console.log('Publishing X post immediately:', postData);
     return this.schedulePost(postData);
   }
 
   // Get post analytics
   async getPostAnalytics(postId: string): Promise<PostAnalytics | null> {
-    // TODO: Implement Twitter Analytics API
-    console.log('Getting Twitter post analytics for:', postId);
+    // TODO: Implement X Analytics API
+    console.log('Getting X post analytics for:', postId);
     return {
       id: 'mock_analytics_id',
       postId,
@@ -123,8 +123,8 @@ export class TwitterService {
     impressions: number;
     engagement: number;
   }> {
-    // TODO: Implement Twitter User Analytics API
-    console.log('Getting Twitter user analytics');
+    // TODO: Implement X User Analytics API
+    console.log('Getting X user analytics');
     return {
       followers: Math.floor(Math.random() * 50000),
       reach: Math.floor(Math.random() * 100000),
@@ -140,7 +140,7 @@ export class TwitterService {
     engagement: number;
   }>> {
     // TODO: Implement AI-powered best time analysis
-    console.log('Getting best posting times for Twitter');
+    console.log('Getting best posting times for X');
     return [
       { day: 'Monday', hour: 9, engagement: 0.88 },
       { day: 'Tuesday', hour: 14, engagement: 0.92 },

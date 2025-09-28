@@ -42,10 +42,10 @@ const socialPlatforms = [
     status: 'active'
   },
   {
-    id: 'twitter',
-    name: 'Twitter',
-    logo: '/platforms/twitter.svg',
-    color: '#1DA1F2',
+    id: 'x',
+    name: 'X',
+    logo: '/platforms/x.svg',
+    color: '#000000',
     connected: true,
     followers: '8.9K',
     engagement: '6.8%',

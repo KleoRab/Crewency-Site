@@ -29,11 +29,11 @@ interface AIAgentProps {
 }
 
 const contentTypes = [
-  { id: 'post', name: 'Social Media Post', icon: DocumentTextIcon, description: 'LinkedIn, Twitter, Facebook' },
+  { id: 'post', name: 'Social Media Post', icon: DocumentTextIcon, description: 'LinkedIn, X, Facebook' },
   { id: 'story', name: 'Swipeable Story', icon: SwipeIcon, description: 'Instagram Stories, TikTok' },
   { id: 'video', name: 'Video Script', icon: VideoCameraIcon, description: 'YouTube, Instagram Reels' },
   { id: 'carousel', name: 'Carousel Post', icon: PhotoIcon, description: 'LinkedIn, Instagram' },
-  { id: 'thread', name: 'Twitter Thread', icon: DocumentTextIcon, description: 'Multi-tweet thread' },
+  { id: 'thread', name: 'X Thread', icon: DocumentTextIcon, description: 'Multi-post thread' },
 ];
 
 const aiPersonalities = {

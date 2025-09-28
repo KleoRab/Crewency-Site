@@ -1,7 +1,7 @@
 import { SocialPlatform } from '@/types';
 import { FacebookService } from './facebookService';
 import { LinkedInService } from './linkedinService';
-import { TwitterService } from './twitterService';
+import { XService } from './twitterService';
 import { InstagramService } from './instagramService';
 
 // Base interface for all social media services
@@ -28,7 +28,7 @@ export class SocialMediaServiceFactory {
       case 'linkedin':
         return new LinkedInService(accessToken);
       case 'twitter':
-        return new TwitterService(accessToken);
+        return new XService(accessToken);
       case 'instagram':
         return new InstagramService(accessToken);
       case 'tiktok':

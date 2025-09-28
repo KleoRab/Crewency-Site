@@ -58,19 +58,19 @@ const mockStats: DashboardStats = {
       message: 'Weekly analytics report generated',
       timestamp: '2024-01-15T07:00:00Z',
     },
-    {
-      id: '5',
-      type: 'post_published',
-      message: 'Twitter post went viral - 1.2K retweets!',
-      timestamp: '2024-01-14T16:30:00Z',
-    },
+        {
+          id: '5',
+          type: 'post_published',
+          message: 'X post went viral - 1.2K reposts!',
+          timestamp: '2024-01-14T16:30:00Z',
+        },
   ],
 };
 
 // Additional mock data for enhanced dashboard
 const platformStats = [
   { name: 'LinkedIn', posts: 456, engagement: 8.7, followers: 12500, color: 'blue' },
-  { name: 'Twitter', posts: 389, engagement: 6.2, followers: 8900, color: 'sky' },
+  { name: 'X', posts: 389, engagement: 6.2, followers: 8900, color: 'sky' },
   { name: 'Facebook', posts: 234, engagement: 5.8, followers: 15600, color: 'indigo' },
   { name: 'Instagram', posts: 168, engagement: 9.1, followers: 23400, color: 'pink' },
 ];
@@ -86,7 +86,7 @@ const recentPosts = [
   },
   {
     id: 2,
-    platform: 'Twitter',
+    platform: 'X',
     content: 'Just launched our new feature. Check it out! #innovation',
     scheduledTime: '4 hours ago',
     status: 'scheduled',
@@ -116,7 +116,7 @@ const topPerformingPosts = [
   {
     id: 2,
     content: '5 tips for better social media engagement in 2024',
-    platform: 'Twitter',
+    platform: 'X',
     engagement: 7.2,
     reach: 8900,
     likes: 156,
