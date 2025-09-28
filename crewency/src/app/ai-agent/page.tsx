@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Layout from '@/components/layout/Layout';
-import EnhancedAIAgent from '@/components/ai/EnhancedAIAgent';
+import UltimateAIAgent from '@/components/ai/UltimateAIAgent';
 import { User } from '@/types';
 import {
   CpuChipIcon,
@@ -263,9 +263,9 @@ export default function AIAgentPage() {
           </div>
         </div>
 
-        {/* Enhanced AI Agent Modal */}
+        {/* Ultimate AI Agent Modal */}
         {showAIAgent && (
-          <EnhancedAIAgent
+          <UltimateAIAgent
             onContentGenerated={handleAIContentGenerated}
             onClose={() => {
               setShowAIAgent(false);
