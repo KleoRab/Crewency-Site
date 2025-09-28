@@ -1,6 +1,9 @@
 // 🧠 LIVING AI BRAIN FOR CREWENCY
 // This is where Crewency comes to life - a truly intelligent AI that thinks, learns, and creates
 
+import ResourceIntelligence from './ResourceIntelligence';
+import RealTimeAPIs from './RealTimeAPIs';
+
 interface AIPersonality {
   creativity: number; // 0-100
   professionalism: number; // 0-100
@@ -41,6 +44,8 @@ class LivingAI {
   private learning: AILearning;
   private isThinking: boolean = false;
   private currentContext: ContentContext | null = null;
+  private resourceIntelligence: ResourceIntelligence;
+  private realTimeAPIs: RealTimeAPIs;
 
   constructor() {
     this.personality = {
@@ -60,6 +65,10 @@ class LivingAI {
       trendPatterns: {},
       conversationHistory: []
     };
+
+    // Initialize resource intelligence
+    this.resourceIntelligence = new ResourceIntelligence();
+    this.realTimeAPIs = new RealTimeAPIs();
   }
 
   // 🧠 MAIN THINKING PROCESS - This is where the magic happens
@@ -74,33 +83,38 @@ class LivingAI {
     this.isThinking = true;
     this.currentContext = context;
 
-    // Step 1: Analyze the user input with emotional intelligence
+    // Step 1: Get real-time intelligence and resources
+    const intelligence = await this.resourceIntelligence.getIntelligentInsights(context);
+    const trendingTopics = await this.realTimeAPIs.getTrendingTopics();
+    const newsArticles = await this.realTimeAPIs.getNewsArticles(userInput, context.industry);
+    
+    // Step 2: Analyze the user input with emotional intelligence
     const emotionalAnalysis = await this.analyzeEmotion(userInput);
     
-    // Step 2: Think about what they really need (not what they asked for)
-    const realNeeds = await this.identifyRealNeeds(userInput, context);
+    // Step 3: Think about what they really need (not what they asked for)
+    const realNeeds = await this.identifyRealNeeds(userInput, context, intelligence);
     
-    // Step 3: Generate creative ideas based on current trends and context
-    const creativeIdeas = await this.generateCreativeIdeas(realNeeds, context);
+    // Step 4: Generate creative ideas based on real trends and context
+    const creativeIdeas = await this.generateCreativeIdeas(realNeeds, context, intelligence, trendingTopics);
     
-    // Step 4: Choose the best approach based on personality and learning
-    const chosenApproach = await this.chooseBestApproach(creativeIdeas, context);
+    // Step 5: Choose the best approach based on personality, learning, and real data
+    const chosenApproach = await this.chooseBestApproach(creativeIdeas, context, intelligence);
     
-    // Step 5: Create the actual content
-    const content = await this.createContent(chosenApproach, context);
+    // Step 6: Create the actual content with real insights
+    const content = await this.createContent(chosenApproach, context, intelligence, newsArticles);
     
-    // Step 6: Learn from this interaction
+    // Step 7: Learn from this interaction
     await this.learnFromInteraction(userInput, content, context);
 
     this.isThinking = false;
 
     return {
-      response: this.generateResponse(emotionalAnalysis, realNeeds),
+      response: this.generateResponse(emotionalAnalysis, realNeeds, intelligence),
       contentType: chosenApproach.type,
       content: content,
       reasoning: chosenApproach.reasoning,
-      suggestions: this.generateSuggestions(context),
-      nextQuestions: this.generateNextQuestions(context)
+      suggestions: this.generateSuggestions(context, intelligence),
+      nextQuestions: this.generateNextQuestions(context, intelligence)
     };
   }
 
