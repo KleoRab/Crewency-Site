@@ -55,6 +55,9 @@ export default function Header({ user, onLogout, showLogo = true }: HeaderProps)
           <Link href="/ai-agent" className="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-lg font-medium hover:from-purple-700 hover:to-blue-700 transition-all duration-200">
             🚀 AI Agent
           </Link>
+          <Link href="/ultimate-ai" className="bg-gradient-to-r from-red-600 to-pink-600 text-white px-4 py-2 rounded-lg font-bold hover:from-red-700 hover:to-pink-700 transition-all duration-200">
+            ⚡ Ultimate AI
+          </Link>
         </div>
 
         {/* Search */}
